@@ -1,0 +1,3911 @@
+From a2430ec2d83b8b1724e864e0c361fe71ea6bec60 Mon Sep 17 00:00:00 2001
+From: Ivan Kh <47220198+Ivan-Khar@users.noreply.github.com>
+Date: Fri, 5 May 2023 12:27:41 +0300
+Subject: My custom modification
+
+---
+ basefiles/hudlayout.res                       |  34 +-
+ materials/HUD/hud_none.vmt                    |  12 +
+ materials/HUD/hud_none.vtf                    | Bin 0 -> 120 bytes
+ resource/clientscheme.res                     | 187 ++++-
+ resource/fonts/Cerbetica_edited.ttf           | Bin 0 -> 46472 bytes
+ resource/fonts/FuturaBookC.ttf                | Bin 0 -> 22196 bytes
+ resource/fonts/FuturaLightC.ttf               | Bin 0 -> 21584 bytes
+ resource/ui/controlpointicon.res              |   4 +-
+ resource/ui/huddamageaccount.res              |  10 +-
+ resource/ui/huddemomanpipes.res               | 235 +++++++
+ resource/ui/huditemeffectmeter_killstreak.res | 102 +++
+ resource/ui/hudmatchstatus.res                | 234 ++++---
+ resource/ui/hudmenutauntselection.res         | 134 ++--
+ resource/ui/hudobjectiveflagpanel.res         | 531 ++++++++++++++
+ resource/ui/objectivestatusescort.res         | 648 ++++++++++++++++++
+ resource/ui/objectivestatusmultipleescort.res |  54 ++
+ resource/ui/targetid.res                      |  28 +-
+ scripts/hudanimations_manifest.txt            |   2 +-
+ scripts/hudcrosshairs.res                     |  10 +-
+ scripts/hudlayout.res                         |   1 -
+ sound/sound.cache                             | Bin 52 -> 16 bytes
+ 21 files changed, 2013 insertions(+), 213 deletions(-)
+ create mode 100644 materials/HUD/hud_none.vmt
+ create mode 100644 materials/HUD/hud_none.vtf
+ create mode 100644 resource/fonts/Cerbetica_edited.ttf
+ create mode 100644 resource/fonts/FuturaBookC.ttf
+ create mode 100644 resource/fonts/FuturaLightC.ttf
+ create mode 100644 resource/ui/huddemomanpipes.res
+ create mode 100644 resource/ui/huditemeffectmeter_killstreak.res
+ create mode 100644 resource/ui/hudobjectiveflagpanel.res
+ create mode 100644 resource/ui/objectivestatusescort.res
+ create mode 100644 resource/ui/objectivestatusmultipleescort.res
+
+diff --git a/basefiles/hudlayout.res b/basefiles/hudlayout.res
+index b3051f8..e28c3cd 100644
+--- a/basefiles/hudlayout.res
++++ b/basefiles/hudlayout.res
+@@ -91,16 +91,16 @@
+ 		"fieldName"		"HudDemomanCharge"
+ 		"visible"		"1"
+ 		"enabled"		"1"
+-		"xpos"			"r80"	[$WIN32]
+-		"xpos_minmode"	"r52"	[$WIN32]
+-		"ypos"			"r21"	[$WIN32]
+-		"ypos_minmode"	"r40"	[$WIN32]
++		"xpos"			"c-35"	[$WIN32]
++		"xpos_minmode"	"c-35"	[$WIN32]
++		"ypos"			"c15"	[$WIN32]
++		"ypos_minmode"	"c10"	[$WIN32]
+ 		"xpos"			"r112"	[$X360]
+ 		"ypos"			"r45"	[$X360]
+ 		"zpos"			"1"			// draw in front of ammo
+ 		"wide"			"60"
+-		"wide_minmode"	"50"
+-		"tall"			"8"
++		"wide_minmode"	"60"
++		"tall"			"4"
+ 		"MeterFG"		"White"
+ 		"MeterBG"		"Gray"
+ 	}	
+@@ -846,8 +846,8 @@
+ 		"tall"					"200"
+ 		"visible"				"1"
+ 		"enabled"				"1"
+-		"separator_width"		"9"	// distance between the icons (including their backgrounds)
+-		"separator_height"		"7"
++		"separator_width"		"3"	// distance between the icons (including their backgrounds)
++		"separator_height"		"35"
+ 		"height_offset"			"0"	[$WIN32] // distance from the bottom of the panel
+ 		"height_offset"			"26"	[$X360]
+ 	}
+@@ -1054,12 +1054,12 @@
+ 		"fieldName"		"HudDemomanPipes"
+ 		"visible"		"1"
+ 		"enabled"		"1"
+-		"xpos"			"r162"	[$WIN32]
+-		"xpos_minmode"	"r110"	[$WIN32]
+-		"ypos"			"r52"	[$WIN32]
+-		"ypos_minmode"	"r30"	[$WIN32]
+-		"xpos"			"r194"	[$X360]
+-		"ypos"			"r74"	[$X360]
++		"xpos"			"c-55"	[$WIN32]
++		"xpos_minmode"	"c"	[$WIN32]
++		"ypos"			"c"	[$WIN32]
++		"ypos_minmode"	"c"	[$WIN32]
++		"xpos"			"c"	[$X360]
++		"ypos"			"c"	[$X360]
+ 		"wide"			"100"
+ 		"tall"			"50"
+ 	}	
+@@ -1419,9 +1419,9 @@
+ 		"visible" 		"1"
+ 		"enabled" 		"1"
+ 		"xpos"			"c-235"
+-		"ypos"			"c-52"
+-		"ypos_hidef"	"c-42"
+-		"ypos_lodef"	"c-42"
++		"ypos"			"r190"
++		"ypos_hidef"	"r220"
++		"ypos_lodef"	"r220"
+ 		"wide"			"470"
+ 		"tall"			"200"
+ 		"PaintBackgroundType"	"0"
+diff --git a/materials/HUD/hud_none.vmt b/materials/HUD/hud_none.vmt
+new file mode 100644
+index 0000000..7f83e40
+--- /dev/null
++++ b/materials/HUD/hud_none.vmt
+@@ -0,0 +1,12 @@
++"UnlitGeneric"
++{
++	"$baseTexture" "hud\hud_none"
++	"$translucent" 1
++	"$alpha" 1
++	"$vertexalpha" "1"
++	"$ignorez"     "1"
++	"$no_fullbright" "1"	
++	"$vertextcolor" "1"
++	"%keywords" "tf"
++}
++
+diff --git a/materials/HUD/hud_none.vtf b/materials/HUD/hud_none.vtf
+new file mode 100644
+index 0000000000000000000000000000000000000000..a3ddbf3ea3d3c24e0e344c4bf52f68a99b184382
+GIT binary patch
+literal 120
+zcmWFwabsX-U|?VY;shXO1VRP{5Dfzj_6!U#3>I_X2U3i@Ac7IBj0vU`Bm~3>Kx_cS
+T89@B+`@Qe~fdFP8kOc++NZ1bC
+
+literal 0
+HcmV?d00001
+
+diff --git a/resource/clientscheme.res b/resource/clientscheme.res
+index 4061db6..070eb2c 100644
+--- a/resource/clientscheme.res
++++ b/resource/clientscheme.res
+@@ -1,5 +1,4 @@
+ #base "../basefiles/ClientScheme.res"
+-
+ Scheme
+ {
+ 	Colors
+@@ -741,6 +740,177 @@ Scheme
+ 				"range"		"0x0000 0x017F" //	Basic Latin, Latin-1 Supplement, Latin Extended-A
+ 			}
+ 		}
++		"MatchPlayerNameMinimal2"
++		{
++			"1"
++			{
++				"name"		"Cerbetica_edited"
++				"tall"		"8"
++				"additive"	"0"
++				"antialias" "1"
++				"outline"	"0"
++			}
++		}
++		"FuturaBook8"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"8"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook10"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"10"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook12"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"12"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook14"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"14"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook16"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"16"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook18"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"18"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook20"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"20"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaBook24"
++		{
++			"1"
++			{
++				"name"		"FuturaBook"
++				"tall"		"24"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight8"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"8"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight10"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"10"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight12"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"12"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight14"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"14"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight16"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"16"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight18"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"18"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight20"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"20"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
++		"FuturaLight24"
++		{
++			"1"
++			{
++				"name"		"FuturaLight"
++				"tall"		"24"
++				"additive" 	"0"
++				"antialias"	"1"
++			}
++		}
+ 	}
+ 
+ 	CustomFontFiles
+@@ -824,6 +994,21 @@ Scheme
+ 			"font" "resource/fonts/tf2cross.ttf"
+ 			"name" "tf2cross"
+ 		}
++		"12"
++		{
++			"font" "resource/fonts/Cerbetica_edited.ttf"
++			"name" "Cerbetica_edited"
++		}
++		"13"
++		{
++			"font" "resource/fonts/FuturaBookC.ttf"
++			"name" "FuturaBook"
++		}
++		"14"
++		{
++			"font" "resource/fonts/FuturaLightC.ttf"
++			"name" "FuturaLight"
++		}
+ 	}
+ }
+ 
+diff --git a/resource/fonts/Cerbetica_edited.ttf b/resource/fonts/Cerbetica_edited.ttf
+new file mode 100644
+index 0000000000000000000000000000000000000000..0e581548943676cf8dafa2b2bd33ca386d248171
+GIT binary patch
+literal 46472
+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
+UuPD-~!`_lR7>5(RmM?p~Klgvl2LJ#7
+
+literal 0
+HcmV?d00001
+
+diff --git a/resource/fonts/FuturaBookC.ttf b/resource/fonts/FuturaBookC.ttf
+new file mode 100644
+index 0000000000000000000000000000000000000000..08591e635bdd0f00702ae67922a765b24debb6d2
+GIT binary patch
+literal 22196
+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
+F{Xh2J{PO?+
+
+literal 0
+HcmV?d00001
+
+diff --git a/resource/fonts/FuturaLightC.ttf b/resource/fonts/FuturaLightC.ttf
+new file mode 100644
+index 0000000000000000000000000000000000000000..7423675fdcf9fd1c0a8f101be53863e2cf94a4dc
+GIT binary patch
+literal 21584
+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
+VFOio+_J_P;`<5N`n|?3z{{q!!;hg{g
+
+literal 0
+HcmV?d00001
+
+diff --git a/resource/ui/controlpointicon.res b/resource/ui/controlpointicon.res
+index 656cdce..9241059 100644
+--- a/resource/ui/controlpointicon.res
++++ b/resource/ui/controlpointicon.res
+@@ -7,9 +7,9 @@
+ 		"xpos"		"0"
+ 		"ypos"		"0"
+ 		"zpos"		"2"
+-		"wide"		"33"
++		"wide"		"20"
+ 	//	"wide_minmode"		"21"
+-		"tall"		"33"
++		"tall"		"20"
+ 	//	"tall_minmode"		"21"
+ 		"visible"	"1"
+ 		"enabled"	"1"
+diff --git a/resource/ui/huddamageaccount.res b/resource/ui/huddamageaccount.res
+index 69cf478..e355c50 100644
+--- a/resource/ui/huddamageaccount.res
++++ b/resource/ui/huddamageaccount.res
+@@ -7,9 +7,9 @@
+ 		"text_y"				"0"
+ 		"delta_item_end_y"		"0"
+ 		"PositiveColor"			"20 250 20 255"
+-		"NegativeColor"			"255 165 0 255"		//orange
++		//"NegativeColor"			"255 165 0 255"		//orange
+ 		//"NegativeColor"			"255 0 0 255"		//red
+-		//"NegativeColor"			"255 255 0 255"		//yellow
++		"NegativeColor"			"255 255 0 255"		//yellow
+ 		//"NegativeColor"			"0 255 255 255"		//turquoise		
+ 		//"NegativeColor"			"255 95 180 255"	//pink as hell
+ 		"delta_lifetime"		"2"
+@@ -26,12 +26,12 @@
+ 		"fieldName"		"HitMarker"
+ 		"textAlignment"	"center"
+ 		"zpos"			"1"
+-		"enabled"		"0"
+-		"visible"		"0"
++		"enabled"		"1"
++		"visible"		"1"
+ 
+ 		"xpos"			"c-28"
+ 		"ypos"			"c-25"
+-		"wide"			"53"
++		"wide"			"54"
+ 		"tall"			"50"
+ 
+ 		"font"			"crosshair40"
+diff --git a/resource/ui/huddemomanpipes.res b/resource/ui/huddemomanpipes.res
+new file mode 100644
+index 0000000..0eec699
+--- /dev/null
++++ b/resource/ui/huddemomanpipes.res
+@@ -0,0 +1,235 @@
++"Resource/UI/HudDemomanPipes.res"
++{
++	"background"
++	{
++		"ControlName"	"CTFImagePanel"
++		"fieldName"		"background"
++		"xpos"			"12"
++		"ypos"			"6"
++		"zpos"			"0"
++		"wide"			"76"
++		"wide_minmode"	"56"
++		"tall"			"38"
++		"visible"		"0"
++		"visible_minmode"	"0"
++		"enabled"		"1"
++		"image"			"../hud/misc_ammo_area_blue"
++		"scaleImage"	"1"	
++		"teambg_2"		"../hud/misc_ammo_area_red"
++		"teambg_2_lodef"	"../hud/misc_ammo_area_red_lodef"
++		"teambg_3"		"../hud/misc_ammo_area_blue"
++		"teambg_3_lodef"	"../hud/misc_ammo_area_blue_lodef"				
++	}
++	
++	"ChargeLabel"
++	{
++		"ControlName"			"CExLabel"
++		"fieldName"				"ChargeLabel"
++		"xpos"					"35"
++		"ypos"					"6"
++		"zpos"					"2"
++		"wide"					"41"
++		"tall"					"15"
++		"autoResize"			"1"
++		"pinCorner"				"2"
++		"visible"				"0"
++		"visible_minmode"		"0"
++		"enabled"				"1"
++		"tabPosition"			"0"
++		"labelText"				"#TF_Charge"
++		"textAlignment"			"center"
++		"fgColor"				"255 255 0 255"
++		"dulltext"				"0"
++		"brighttext"			"0"
++		"font"					"FuturaLight8"
++		"fgcolor_override"		"0 0 0 0"
++	}
++
++	"ChargeMeter"
++	{	
++		"ControlName"			"ContinuousProgressBar"
++		"fieldName"				"ChargeMeter"
++		"font"					"Default"
++		"xpos"					"35"
++		"ypos"					"20"
++		"ypos_minmode"			"24"
++		"xpos_minmode"			"10"
++		"zpos"					"2"
++		"wide"					"40"
++		"wide_minmode"			"40"
++		"tall"					"4"				
++		"autoResize"			"0"
++		"pinCorner"				"0"
++		"visible"				"1"
++		"enabled"				"1"
++		"textAlignment"			"Left"
++		"dulltext"				"0"
++		"brighttext"			"0"
++	}				
++		
++	"PipesPresentPanel"
++	{
++		"ControlName"	"EditablePanel"
++		"fieldName"		"PipesPresentPanel"
++		"xpos"			"0"
++		"ypos"			"0"
++		"zpos"			"1"
++		"wide"			"100"
++		"tall"			"50"
++		"visible"		"1"
++		
++		"PipeIcon"
++		{
++			"ControlName"	"CTFImagePanel"
++			"fieldName"		"PipeIcon"
++			"xpos"			"26"
++			"ypos"			"16"
++			"ypos_minmode"	"12"
++			"wide"			"20"
++			"wide_minmode"	"14"
++			"tall"			"20"
++			"tall_minmode"	"14"
++			"visible"		"0"
++			"enabled"		"0"
++			"image"			"../hud/ico_stickybomb_red"
++			"scaleImage"	"1"
++			"teambg_2"		"../hud/ico_stickybomb_red"
++			"teambg_3"		"../hud/ico_stickybomb_blue"	
++		}	
++		
++		"NumPipesLabel"
++		{
++			"ControlName"	"CExLabel"
++			"fieldName"		"NumPipesLabel"
++			"xpos"			"52"
++			"xpos_minmode"	"52"
++			"ypos"			"16"
++			"ypos_minmode"	"16"
++			"zpos"			"2"
++			"wide"			"35"
++			"tall"			"20"
++			"tall_lodef"	"28"
++			"autoResize"	"1"
++			"pinCorner"		"2"
++			"visible"		"1"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		"%activepipes%"
++			"textAlignment"	"west"
++			"dulltext"		"0"
++			"brighttext"	"0"
++			"font"			"HudFontSmallShadow"
++			"font_minmode"	"HudFontSmallShadow"
++			"font_lodef"	"HudFontMediumBig"
++		}
++		"NumPipesLabelDropshadow"
++		{
++			"ControlName"	"CExLabel"
++			"fieldName"		"NumPipesLabelDropshadow"
++			"xpos"			"51"
++			"xpos_minmode"	"43"
++			"ypos"			"19"
++			"ypos_minmode"	"13"
++			"zpos"			"2"
++			"wide"			"35"
++			"tall"			"20"
++			"tall_lodef"	"28"
++			"autoResize"	"1"
++			"pinCorner"		"2"
++			"visible"		"0"
++			"enabled"		"0"
++			"tabPosition"	"0"
++			"labelText"		"%activepipes%"
++			"textAlignment"	"west"
++			"dulltext"		"0"
++			"brighttext"	"0"
++			"font"			"HudFontSmall"
++			"font_minmode"	"HudFontSmall"
++			"font_lodef"	"HudFontMediumBig"
++			"fgcolor"		"black"
++		}		
++	}
++	
++	"NoPipesPresentPanel"
++	{
++		"ControlName"	"EditablePanel"
++		"fieldName"		"NoPipesPresentPanel"
++		"xpos"			"0"
++		"ypos"			"0"
++		"zpos"			"1"
++		"wide"			"100"
++		"tall"			"50"
++		"visible"		"1"
++		
++		"PipeIcon"
++		{
++			"ControlName"	"CTFImagePanel"
++			"fieldName"		"PipeIcon"
++			"xpos"			"26"
++			"ypos"			"16"
++			"ypos_minmode"	"12"
++			"wide"			"20"
++			"wide_minmode"	"14"
++			"tall"			"20"
++			"tall_minmode"	"14"
++			"visible"		"0"
++			"enabled"		"0"
++			"image"			"../hud/ico_stickybomb_red_faded"
++			"scaleImage"	"1"
++			"teambg_2"		"../hud/ico_stickybomb_red_faded"
++			"teambg_3"		"../hud/ico_stickybomb_blue_faded"	
++		}
++
++		"NumPipesLabel"
++		{
++			"ControlName"	"CExLabel"
++			"fieldName"		"NumPipesLabel"
++			"xpos"			"52"
++			"xpos_minmode"	"52"
++			"ypos"			"16"
++			"ypos_minmode"	"16"
++			"zpos"			"2"
++			"wide"			"35"
++			"tall"			"20"
++			"tall_lodef"	"28"
++			"autoResize"	"1"
++			"pinCorner"		"2"
++			"visible"		"1"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		"%activepipes%"
++			"textAlignment"	"west"
++			"dulltext"		"1"
++			"brighttext"	"0"
++			"font"			"HudFontSmallShadow"
++			"font_minmode"	"HudFontSmallShadow"
++			"font_lodef"	"HudFontMediumBig"
++		}
++		"NumPipesLabelDropshadow"
++		{
++			"ControlName"	"CExLabel"
++			"fieldName"		"NumPipesLabelDropshadow"
++			"xpos"			"51"
++			"xpos_minmode"	"43"
++			"ypos"			"19"
++			"ypos_minmode"	"13"
++			"zpos"			"2"
++			"wide"			"35"
++			"tall"			"20"
++			"tall_lodef"	"28"
++			"autoResize"	"1"
++			"pinCorner"		"2"
++			"visible"		"0"
++			"enabled"		"0"
++			"tabPosition"	"0"
++			"labelText"		"%activepipes%"
++			"textAlignment"	"west"
++			"dulltext"		"1"
++			"brighttext"	"0"
++			"font"			"HudFontMedium"
++			"font_minmode"	"HudFontSmall"
++			"font_lodef"	"HudFontMediumBig"
++			"fgcolor"		"black"
++		}			
++	}				
++}
+diff --git a/resource/ui/huditemeffectmeter_killstreak.res b/resource/ui/huditemeffectmeter_killstreak.res
+new file mode 100644
+index 0000000..f480b62
+--- /dev/null
++++ b/resource/ui/huditemeffectmeter_killstreak.res
+@@ -0,0 +1,102 @@
++"Resource/UI/HudItemEffectMeter_Demoman.res"
++{
++	HudItemEffectMeter
++	{
++		"fieldName"		"HudItemEffectMeter"
++		"visible"		"1"
++		"enabled"		"1"
++		"xpos"			"0"	[$WIN32]
++		"ypos"			"r125"	[$WIN32]
++		"xpos_minmode"	"68"	[$WIN32]
++		"ypos_minmode"	"r40"	[$WIN32]
++		"wide"			"100"
++		"tall"			"50"
++		"MeterFG"		"White"
++		"MeterBG"		"Gray"
++	}
++	
++	"ItemEffectMeterBG"
++	{
++		"ControlName"	"CTFImagePanel"
++		"fieldName"		"ItemEffectMeterBG"
++		"xpos"			"12"
++		"ypos"			"0"
++		"zpos"			"0"
++		"wide"			"76"
++		"tall"			"44"
++		"visible"		"0"
++		"visible_minmode"	"0"
++		"enabled"		"0"
++		"image"			"../hud/misc_ammo_area_blue"
++		"scaleImage"	"1"	
++		"teambg_2"		"../hud/misc_ammo_area_red"
++		"teambg_2_lodef"	"../hud/misc_ammo_area_red_lodef"
++		"teambg_3"		"../hud/misc_ammo_area_blue"
++		"teambg_3_lodef"	"../hud/misc_ammo_area_blue_lodef"				
++	}
++	
++	"ItemEffectMeterLabel"
++	{
++		"ControlName"			"CExLabel"
++		"fieldName"				"ItemEffectMeterLabel"
++		"xpos"					"25"
++		"ypos"					"27"
++		"zpos"					"2"
++		"wide"					"41"
++		"tall"					"15"
++		"autoResize"			"1"
++		"pinCorner"				"2"
++		"visible"				"1"
++		"enabled"				"1"
++		"tabPosition"			"0"
++		"labelText"				"#TF_KillStreak"
++		"textAlignment"			"center"
++		"dulltext"				"0"
++		"brighttext"			"0"
++		"font"					"TFFontSmall"
++	}
++
++	"ItemEffectMeter"
++	{	
++		"ControlName"			"ContinuousProgressBar"
++		"fieldName"				"ItemEffectMeter"
++		"font"					"Default"
++		"xpos"					"25"
++		"ypos"					"23"
++		"ypos_minmode"			"0"
++		"xpos_minmode"			"0"
++		"zpos"					"2"
++		"wide"					"40"
++		"wide_minmode"			"50"
++		"tall"					"6"				
++		"autoResize"			"0"
++		"pinCorner"				"0"
++		"visible"				"0"
++		"enabled"				"0"
++		"textAlignment"			"Left"
++		"dulltext"				"0"
++		"brighttext"			"0"
++	}					
++	
++	"ItemEffectMeterCount"
++	{
++		"ControlName"			"CExLabel"
++		"fieldName"				"ItemEffectMeterCount"
++		"xpos"					"25"
++		"ypos_minmode"			"18"
++		"ypos"					"10"
++		"zpos"					"2"
++		"wide"					"40"
++		"tall"					"20"	
++		"pinCorner"				"2"
++		"visible"				"1"
++		"enabled"				"1"
++		"tabPosition"			"0"
++		"labelText"				"%progresscount%"
++		"textAlignment"			"north"
++		"dulltext"				"0"
++		"brighttext"			"0"
++		"font"					"HudFontMedium"
++		"font_minmode"			"HudFontSmall"
++	}
++}
+diff --git a/resource/ui/hudmatchstatus.res b/resource/ui/hudmatchstatus.res
+index dece6ee..95929e0 100644
+--- a/resource/ui/hudmatchstatus.res
++++ b/resource/ui/hudmatchstatus.res
+@@ -146,7 +146,7 @@
+ 		"ControlName"	"CModelPanel"
+ 		"fieldName"		"MatchDoors"
+ 		"xpos"			"0"
+-		"ypos"			"0"
++		"ypos"			"-10000"
+ 		"zpos"			"2"		
+ 		"wide"			"f0"
+ 		"tall"			"f0"
+@@ -353,31 +353,30 @@
+ 			}
+ 		}	
+ 	}
++	
+ 	"TeamStatus"
+ 	{
+ 		"ControlName"	"CTFTeamStatus"
+ 		"fieldName"		"TeamStatus"
+ 		"xpos"			"0"
+-		"ypos"			"0"
++		"ypos"			"r32"
+ 		"zpos"			"2"
+ 		"wide"			"f0"
+ 		"tall"			"75"
+ 		"visible"		"1"
+ 		"enabled"		"1"
++		"max_size"		"24"
+ 
+-
+-		"max_size"	"19"
+-
+-		"6v6_gap"	"4"
+-		"12v12_gap"	"1"
++		"6v6_gap"		"1"
++		"12v12_gap"		"1"
+ 
+ 		"team1_grow_dir" "west"
+-		"team1_base_x"	"c-45"
+-		"team1_max_expand"	"133"
++		"team1_base_x"	"c-5"
++		"team1_max_expand"	"192"
+ 
+ 		"team2_grow_dir" "east"
+-		"team2_base_x"	"c47"
+-		"team2_max_expand"	"133"
++		"team2_base_x"	"c5"
++		"team2_max_expand"	"192"
+ 
+ 		"playerpanels_kv"
+ 		{
+@@ -386,56 +385,91 @@
+ 			"tall"			"50"
+ 			"zpos"			"1"
+ 
+-			"color_portrait_bg_red"	"119 62 61 255"
+-			"color_portrait_bg_blue"	"62 81 101 255"
+-			"color_portrait_bg_red_dead"	"79 54 52 255"
+-			"color_portrait_bg_blue_dead"	"44 49 51 255"
+-			"color_bar_health_high"	"84 191 58 255"
+-			"color_bar_health_med"	"191 183 58 255"
+-			"percentage_health_med"	"0.6"
+-			"color_bar_health_low"	"191 58 58 255"
+-			"percentage_health_low"	"0.3"
+-			"color_portrait_blend_dead_red"	"255 255 255 255"
+-			"color_portrait_blend_dead_blue" "255 255 255 255"
++			"color_portrait_bg_red"				"162 64 63 205"
++			"color_portrait_bg_blue"			"77 109 143 205"
++			"color_portrait_bg_red_dead"		"23 23 23 237"
++			"color_portrait_bg_blue_dead"		"23 23 23 237"
++			"color_bar_health_high"				"22 169 15 237"
++			"color_bar_health_med"				"192 179 2 255"
++			"color_bar_health_low"				"198 47 42 255"
++			"percentage_health_med"				"0.6"
++			"percentage_health_low"				"0.3"
++			"color_portrait_blend_dead_red"		"255 255 255 255"
++			"color_portrait_blend_dead_blue" 	"255 255 255 255"
+ 			
+ 			"playername"
+ 			{
+ 				"ControlName"	"CExLabel"
+ 				"fieldName"		"playername"
+-				"font"			"DefaultVerySmall"
+-				"xpos"			"5"
+-				"ypos"			"24"
+-				"zpos"			"5"
+-				"wide"			"50"
+-				"tall"			"8"
++				"font"			"MatchPlayerNameMinimal2"
++				"xpos"			"1"
++				"ypos"			"-1"
++				"zpos"			"8"
++				"wide"			"f0"
++				"tall"			"9"
+ 				"autoResize"	"0"
+ 				"pinCorner"		"0"
+-				"visible"		"0"
++				"enabled"		"1"
++				"visible"		"1"
++				"labelText"		"%playername%"
++			}
++			"playernameshadow"
++			{
++				"ControlName"	"CExLabel"
++				"fieldName"		"playernameshadow"
++				"font"			"MatchPlayerNameMinimal2"
++				"xpos"			"1"
++				"ypos"			"0"
++				"zpos"			"7"
++				"wide"			"f0"
++				"tall"			"9"
++				"autoResize"	"0"
++				"pinCorner"		"0"
++				"enabled"		"1"
++				"visible"		"1"
++				"labelText"		"%playername%"
++				"textAlignment"		"north-west"
++				"fgcolor"		"0 0 0 225"
+ 			}
+ 			"classimage"
+ 			{
+ 				"ControlName"	"CTFClassImage"
+ 				"fieldName"		"classimage"
+ 				"xpos"			"cs-0.5"
+-				"ypos"			"0"
+-				"zpos"			"3"
+-				"wide"			"19"
+-				"tall"			"19"
++				"ypos"			"8"
++				"zpos"			"7"
++				"wide"			"18"
++				"tall"			"18"
+ 				"visible"		"1"
+ 				"enabled"		"1"
+ 				"image"			"../hud/class_scoutred"
+ 				"scaleImage"	"1"	
+ 				"proportionaltoparent"	"1"
+ 			}
++			"playerpanelbg"
++			{
++				"ControlName"	"Panel"
++				"fieldName"		"playerpanelbg"
++				"xpos"			"0"
++				"ypos"			"7"
++				"zpos"			"4"
++				"wide"			"f0"
++				"tall"			"18"
++				"visible"		"1"
++				"enabled"		"1"
++				"PaintBackgroundType"	"0"
++				"proportionaltoparent"	"1"
++				"bgcolor_override"		"20 20 20 150"
++			}
+ 			"classimagebg"
+ 			{
+-				"ControlName"		"Panel"
++				"ControlName"	"Panel"
+ 				"fieldName"		"classimagebg"
+ 				"xpos"			"0"
+ 				"ypos"			"0"
+ 				"zpos"			"2"
+ 				"wide"			"f0"
+-				"tall"			"19"
++				"tall"			"25"
+ 				"visible"		"1"
+ 				"enabled"		"1"
+ 				"PaintBackgroundType"	"0"
+@@ -443,22 +477,39 @@
+ 			}
+ 			"healthbar"
+ 			{	
+-				"ControlName"			"ContinuousProgressBar"
+-				"fieldName"				"healthbar"
+-				"font"					"Default"																		
+-				"xpos"					"0"
+-				"ypos"					"19"
+-				"zpos"					"5"
+-				"wide"					"f0"
+-				"tall"					"2"				
+-				"autoResize"			"0"
+-				"pinCorner"				"0"
+-				"visible"				"1"
+-				"enabled"				"1"
+-				"textAlignment"			"Left"
+-				"dulltext"				"0"
+-				"brighttext"			"0"
+-				"bgcolor_override"	   "80 80 80 255"
++				"ControlName"	"ContinuousProgressBar"
++				"fieldName"		"healthbar"
++				"font"			"Default"																		
++				"xpos"			"0"
++				"ypos"			"0"
++				"zpos"			"3"
++				"wide"			"8000" // Bar acts as solid colored tile
++				"tall"			"25"				
++				"autoResize"	"0"
++				"pinCorner"		"0"
++				"visible"		"1"
++				"enabled"		"1"
++				"textAlignment"	"Left"
++				"dulltext"		"0"
++				"brighttext"	"0"
++				"bgcolor_override"		"80 80 80 0"
++				"proportionaltoparent"	"1"
++			}
++			"respawntime" 
++			{
++				"ControlName"	"CExLabel"
++				"fieldName"		"respawntime"
++				"font"			"MatchPlayerDeath"
++				"xpos"			"cs-0.5"
++				"ypos"			"0"
++				"zpos"			"9"
++				"wide"			"f0"
++				"tall"			"12"
++				"autoResize"	"0"
++				"pinCorner"		"0"
++				"visible"		"1"
++				"labelText"		"%respawntime%"
++				"textAlignment"	"center"
+ 				"proportionaltoparent"	"1"
+ 			}
+ 			"overhealbar"
+@@ -466,11 +517,11 @@
+ 				"ControlName"			"ContinuousProgressBar"
+ 				"fieldName"				"overhealbar"
+ 				"font"					"Default"																		
+-				"xpos"					"0"
+-				"ypos"					"19"
++				"xpos"					"p0.30"
++				"ypos"					"0"
+ 				"zpos"					"6"
+-				"wide"					"f0"
+-				"tall"					"2"				
++				"wide"					"f1"
++				"tall"					"24"				
+ 				"autoResize"			"0"
+ 				"pinCorner"				"0"
+ 				"visible"				"1"
+@@ -478,11 +529,11 @@
+ 				"textAlignment"			"Left"
+ 				"dulltext"				"0"
+ 				"brighttext"			"0"
+-				"bgcolor_override"	   "0 0 0 0"
+-				"fgcolor_override"	   "255 255 255 160"
+-				"proportionaltoparent"	"1"
++				"bgcolor_override"	   	"0 0 0 0"
++				"fgcolor_override"	   	"255 219 88 255"
++				"proportionaltoparent" "1"
+ 			}
+-			"HealthIcon"
++			"HealthIcon" // Disabled
+ 			{
+ 				"ControlName"		"EditablePanel"
+ 				"fieldName"			"HealthIcon"
+@@ -492,35 +543,35 @@
+ 				"wide"				"32"
+ 				"tall"				"32"
+ 				"visible"			"0"
+-				"enabled"			"1"	
++				"enabled"			"0"	
+ 				"HealthBonusPosAdj"	"10"
+ 				"HealthDeathWarning"		"0.49"
+ 				"TFFont"					"HudFontSmallest"
+ 				"HealthDeathWarningColor"	"HUDDeathWarning"
+ 				"TextColor"					"HudOffWhite"
+ 			}
+-			"ReadyBG"
++			"ReadyBG" // Disabled
+ 			{
+-				"ControlName"		"ScalableImagePanel"
++				"ControlName"	"ScalableImagePanel"
+ 				"fieldName"		"ReadyBG"
+ 				"xpos"			"30"
+ 				"ypos"			"6"
+ 				"zpos"			"-1"
+-				"wide"			"16"
+-				"tall"			"16"
++				"wide"			"14"
++				"tall"			"14"
+ 				"autoResize"	"0"
+ 				"pinCorner"		"0"
+ 				"visible"		"0"
+ 				"enabled"		"1"
+ 				"image"			"../HUD/tournament_panel_brown"
+-				"src_corner_height"	"22"				// pixels inside the image
++				"src_corner_height"	"22"
+ 				"src_corner_width"	"22"
+-				"draw_corner_width"	"3"				// screen size of the corners ( and sides ), proportional
++				"draw_corner_width"	"3"	
+ 				"draw_corner_height" 	"3"
+ 			}
+-			"ReadyImage"
++			"ReadyImage" // Disabled
+ 			{
+-				"ControlName"		"ImagePanel"
++				"ControlName"	"ImagePanel"
+ 				"fieldName"		"ReadyImage"
+ 				"xpos"			"32"
+ 				"ypos"			"8"
+@@ -534,33 +585,16 @@
+ 				"image"			"hud/checkmark"
+ 				"scaleImage"	"1"
+ 			}
+-			"respawntime"
+-			{
+-				"ControlName"	"CExLabel"
+-				"fieldName"		"respawntime"
+-				"font"			"PlayerPanelPlayerName"
+-				"xpos"			"cs-0.5"
+-				"ypos"			"0"
+-				"zpos"			"5"
+-				"wide"			"f0"
+-				"tall"			"19"
+-				"autoResize"	"0"
+-				"pinCorner"		"0"
+-				"visible"		"1"
+-				"labelText"		"%respawntime%"
+-				"textAlignment"	"center"
+-				"proportionaltoparent"	"1"
+-			}
+-			"chargeamount"
++			"chargeamount" // Disabled
+ 			{
+ 				"ControlName"	"CExLabel"
+ 				"fieldName"		"chargeamount"
+ 				"font"			"DefaultSmall"
+-				"xpos"			"25"
+-				"ypos"			"17"
+-				"zpos"			"6"
++				"xpos"			"cs-0.5"
++				"ypos"			"14"
++				"zpos"			"9"
+ 				"wide"			"25"
+-				"tall"			"15"
++				"tall"			"14"
+ 				"autoResize"	"0"
+ 				"pinCorner"		"0"
+ 				"visible"		"0"
+@@ -568,7 +602,7 @@
+ 				"textAlignment"	"north"
+ 				"fgcolor"		"0 255 0 255"
+ 			}
+-			"specindex"
++			"specindex" // Disabled
+ 			{
+ 				"ControlName"	"CExLabel"
+ 				"fieldName"		"specindex"
+@@ -583,36 +617,36 @@
+ 				"visible"		"0"
+ 				"labelText"		"%specindex%"
+ 				"textAlignment"	"north-west"
+-				//"fgcolor"		"235 226 202 255"
+ 			}
+-			"DeathPanel"
++			"DeathPanel" // Disabled
+ 			{
+ 				"ControlName"	"ImagePanel"
+ 				"fieldName"		"DeathPanel"
+ 				"xpos"			"cs-0.5"
+-				"ypos"			"0"
++				"ypos"			"c-8"
+ 				"zpos"			"0"
+ 				"wide"			"f0"
+-				"tall"			"24"
++				"tall"			"0"
+ 				"visible"		"0"
+-				"enabled"		"1"
++				"enabled"		"0"
+ 				"image"			"../HUD/comp_player_status"	
+ 				"scaleImage"	"1"
+ 				"proportionaltoparent"	"1"	
+ 			}
+-			"SkullPanel"
++			"SkullPanel" // Disabled
+ 			{
+ 				"ControlName"	"ImagePanel"
+ 				"fieldName"		"SkullPanel"
+ 				"xpos"			"cs-0.5"
+ 				"zpos"			"1"
+-				"wide"			"o1.2"
+-				"tall"			"p0.15"
++				"wide"			"8"
++				"tall"			"0"
+ 				"visible"		"0"
+-				"enabled"		"1"
++				"enabled"		"0"
+ 				"image"			"../HUD/comp_player_status_skull"	
+ 				"scaleImage"	"1"
+ 				"proportionaltoparent"	"1"	
++				"fgcolor"		"255 255 255 255"
+ 			}
+ 		}
+ 	}
+diff --git a/resource/ui/hudmenutauntselection.res b/resource/ui/hudmenutauntselection.res
+index 1e1bd9b..62ce976 100644
+--- a/resource/ui/hudmenutauntselection.res
++++ b/resource/ui/hudmenutauntselection.res
+@@ -4,11 +4,11 @@
+ 	{
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"MainBackground"
+-		"xpos"			"0"
+-		"ypos"			"15"
++		"xpos"			"114"
++		"ypos"			"16"
+ 		"zpos"			"0"
+-		"wide"			"470"
+-		"tall"			"170"
++		"wide"			"240"
++		"tall"			"135"
+ 		"visible"		"1"
+ 		"enabled"		"1"
+ 		"scaleImage"	"1"	
+@@ -21,7 +21,7 @@
+ 		"ControlName"	"ImagePanel"
+ 		"fieldName"		"Divider"
+ 		"xpos"			"8"
+-		"ypos"			"65"
++		"ypos"			"r-1000"
+ 		"zpos"			"1"
+ 		"wide"			"456"
+ 		"tall"			"2"
+@@ -33,7 +33,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"IcoReelIcon"
+ 		"xpos"			"10"
+-		"ypos"			"-3"
++		"ypos"			"r-1000"
+ 		"zpos"			"1"
+ 		"wide"			"50"
+ 		"tall"			"50"
+@@ -49,7 +49,7 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"TitleLabel"
+ 		"font"			"HudFontGiantBold"
+-		"xpos"			"60"			// align me to the left edge of the first selection
++		"xpos"			"163"			// align me to the left edge of the first selection
+ 		"ypos"			"5"
+ 		"zpos"			"3"
+ 		"wide"			"360"
+@@ -70,7 +70,7 @@
+ 		"fieldName"		"TitleLabelDropshadow"
+ 		"font"			"HudFontGiantBold"
+ 		"fgcolor"		"Black"
+-		"xpos"			"60"			// align me to the left edge of the first selection
++		"xpos"			"165"			// align me to the left edge of the first selection
+ 		"ypos"			"6"
+ 		"zpos"			"3"
+ 		"wide"			"360"
+@@ -91,7 +91,7 @@
+ 		"fieldName"		"WeaponTauntLabel"
+ 		"font"			"Default"
+ 		"xpos"			"17"
+-		"ypos"			"49"
++		"ypos"			"r-1000"
+ 		"zpos"			"2"
+ 		"wide"			"350"
+ 		"tall"			"13"
+@@ -110,8 +110,8 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"CancelLabel"
+ 		"font"			"Default"
+-		"xpos"			"250"
+-		"ypos"			"49"
++		"xpos"			"70"
++		"ypos"			"39"
+ 		"zpos"			"2"
+ 		"wide"			"200"
+ 		"tall"			"13"
+@@ -129,8 +129,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel1"
+-		"xpos"			"17"
+-		"ypos"			"85"
++		"xpos"			"127"
++		"ypos"			"55"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -166,7 +166,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg1"
+ 		"xpos"			"32"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -182,10 +182,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel1"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"32"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"144"
++		"ypos"			"51"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -202,8 +202,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel2"
+-		"xpos"			"73"
+-		"ypos"			"85"
++		"xpos"			"182"
++		"ypos"			"55"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -239,7 +239,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg2"
+ 		"xpos"			"87"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -255,10 +255,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel2"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"87"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"199"
++		"ypos"			"51"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -275,8 +275,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel3"
+-		"xpos"			"127"
+-		"ypos"			"85"
++		"xpos"			"237"
++		"ypos"			"55"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -312,7 +312,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg3"
+ 		"xpos"			"142"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -328,10 +328,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel3"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"142"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"254"
++		"ypos"			"51"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -348,8 +348,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel4"
+-		"xpos"			"182"
+-		"ypos"			"85"
++		"xpos"			"292"
++		"ypos"			"55"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -385,7 +385,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg4"
+ 		"xpos"			"197"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -401,10 +401,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel4"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"197"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"309"
++		"ypos"			"51"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -421,8 +421,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel5"
+-		"xpos"			"237"
+-		"ypos"			"85"
++		"xpos"			"127"
++		"ypos"			"100"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -458,7 +458,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg5"
+ 		"xpos"			"252"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -474,10 +474,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel5"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"252"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"144"
++		"ypos"			"96"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -494,8 +494,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel6"
+-		"xpos"			"292"
+-		"ypos"			"85"
++		"xpos"			"182"
++		"ypos"			"100"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -531,7 +531,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg6"
+ 		"xpos"			"307"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -547,10 +547,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel6"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"307"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"199"
++		"ypos"			"96"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -567,8 +567,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel7"
+-		"xpos"			"347"
+-		"ypos"			"85"
++		"xpos"			"237"
++		"ypos"			"100"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -604,7 +604,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg7"
+ 		"xpos"			"362"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -620,10 +620,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel7"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"362"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"254"
++		"ypos"			"96"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+@@ -640,8 +640,8 @@
+ 	{
+ 		"ControlName"	"CItemModelPanel"
+ 		"fieldName"		"TauntModelPanel8"
+-		"xpos"			"402"
+-		"ypos"			"85"
++		"xpos"			"292"
++		"ypos"			"100"
+ 		"zpos"			"100"
+ 		"wide"			"50"
+ 		"tall"			"40"
+@@ -677,7 +677,7 @@
+ 		"ControlName"	"CIconPanel"
+ 		"fieldName"		"NumberBg8"
+ 		"xpos"			"417"
+-		"ypos"			"140"
++		"ypos"			"r-1000"
+ 		"zpos"			"4"
+ 		"wide"			"15"
+ 		"tall"			"15"
+@@ -693,10 +693,10 @@
+ 		"ControlName"	"CExLabel"
+ 		"fieldName"		"NumberLabel8"
+ 		"font"			"Default"
+-		"fgcolor"		"Black"
+-		"xpos"			"417"
+-		"ypos"			"140"
+-		"zpos"			"5"
++		"fgcolor"		"White"
++		"xpos"			"309"
++		"ypos"			"96"
++		"zpos"			"151"
+ 		"wide"			"15"
+ 		"tall"			"15"
+ 		"autoResize"	"0"
+diff --git a/resource/ui/hudobjectiveflagpanel.res b/resource/ui/hudobjectiveflagpanel.res
+new file mode 100644
+index 0000000..2544b7e
+--- /dev/null
++++ b/resource/ui/hudobjectiveflagpanel.res
+@@ -0,0 +1,531 @@
++"Resource/UI/HudObjectiveFlagPanel.res"
++{	
++	"ObjectiveStatusFlagPanel"
++	{
++		"ControlName"		"EditablePanel"
++		"fieldName"			"ObjectiveStatusFlagPanel"
++		"xpos"				"0"
++		"ypos"				"-15"
++		"zpos"				"-1"
++		"wide"				"f0"
++		"tall"				"480"
++		"visible"			"1"
++		"enabled"			"1"
++		
++		"if_hybrid"
++		{
++			"zpos"			"-1"
++		}
++	}
++	
++	"LeftSideBG"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"LeftSideBG"
++		"xpos"			"c-140"
++		"ypos"			"r75"	[$WIN32]
++		"ypos"			"r96"	[$X360]
++		"zpos"			"1"
++		"wide"			"280"
++		"tall"			"80"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_bg_left"
++		"scaleImage"	"1"	
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}
++		
++	"RightSideBG"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"RightSideBG"
++		"xpos"			"c-140"
++		"ypos"			"r75"	[$WIN32]
++		"ypos"			"r96"	[$X360]
++		"zpos"			"1"
++		"wide"			"280"
++		"tall"			"80"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_bg_right"
++		"scaleImage"	"1"	
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}
++		
++	"OutlineBG"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"OutlineBG"
++		"xpos"			"c-140"
++		"ypos"			"r75"	[$WIN32]
++		"ypos"			"r96"	[$X360]
++		"zpos"			"2"
++		"wide"			"280"
++		"tall"			"80"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_bg_outline"
++		"scaleImage"	"1"	
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}
++	
++	"BlueScore"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"BlueScore"
++		"xpos"			"c-110"
++		"ypos"			"r67"
++		"ypos_lodef"	"r88"
++		"ypos_hidef"	"r93"
++		"zpos"			"8"
++		"wide"			"75"
++		"tall"			"35"
++		"tall_hidef"	"100"
++		"tall_lodef"	"75"
++		"visible"		"1"
++		"enabled"		"1"
++		"textAlignment"	"west"	
++		"labelText"		"%bluescore%"
++		"font"			"HudFontBig"
++		"font_hidef"	"HudFontGiant"
++		"font_lodef"	"HudFontGiant"
++		"fgcolor"		"TanLight"
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++		
++	"BlueScoreShadow"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"BlueScoreShadow"
++		"xpos"			"c-108"
++		"ypos"			"r66"
++		"ypos_lodef"	"r87"
++		"ypos_hidef"	"r92"
++		"zpos"			"7"
++		"wide"			"75"
++		"tall"			"35"
++		"tall_hidef"	"100"
++		"tall_lodef"	"75"
++		"visible"		"1"
++		"enabled"		"1"
++		"textAlignment"	"west"	
++		"labelText"		"%bluescore%"
++		"font"			"HudFontBig"
++		"font_hidef"	"HudFontGiant"
++		"font_lodef"	"HudFontGiant"
++		"fgcolor"		"Black"
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++							
++	"RedScore"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"RedScore"
++		"xpos"			"c37"
++		"ypos"			"r67"
++		"ypos_lodef"	"r88"
++		"ypos_hidef"	"r93"
++		"zpos"			"8"
++		"wide"			"75"
++		"tall"			"35"
++		"tall_hidef"	"100"
++		"tall_lodef"	"75"
++		"visible"		"1"
++		"enabled"		"1"
++		"textAlignment"	"east"	
++		"labelText"		"%redscore%"
++		"font"			"HudFontBig"
++		"font_hidef"	"HudFontGiant"
++		"font_lodef"	"HudFontGiant"
++		"fgcolor"		"TanLight"		
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++		
++	"RedScoreShadow"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"RedScoreShadow"
++		"xpos"			"c39"
++		"ypos"			"r66"
++		"ypos_lodef"	"r87"
++		"ypos_hidef"	"r92"
++		"zpos"			"7"
++		"wide"			"75"
++		"tall"			"35"
++		"tall_hidef"	"100"
++		"tall_lodef"	"75"
++		"visible"		"1"
++		"enabled"		"1"
++		"textAlignment"	"east"	
++		"labelText"		"%redscore%"
++		"font"			"HudFontBig"
++		"font_hidef"	"HudFontGiant"
++		"font_lodef"	"HudFontGiant"
++		"fgcolor"		"Black"		
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++															
++	"OutlineImage"
++	{
++		"ControlName"	"CTFImagePanel"
++		"fieldName"		"OutlineImage"
++		"xpos"			"c-50"
++		"ypos"			"r127"	[$WIN32]
++		"ypos"			"r148"	[$X360]
++		"zpos"			"9"
++		"wide"			"100"
++		"tall"			"50"
++		"visible"		"1"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_carried_outline"
++		"scaleImage"	"1"	
++	}		
++	
++	"CarriedImage"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"CarriedImage"
++		"xpos"			"c-50"
++		"ypos"			"r137"	[$WIN32]
++		"ypos"			"r158"	[$X360]
++		"zpos"			"10"
++		"wide"			"100"
++		"tall"			"100"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_carried_red"
++		"scaleImage"	"1"
++		
++		"if_hybrid"
++		{
++			"ypos"		"r142"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"r142"
++		}
++	}		
++	
++	"PlayingTo"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"PlayingTo"
++		"xpos"			"c-70"	[$WIN32]
++		"xpos"			"c-60"	[$X360]
++		"ypos"			"r46"	[$WIN32]
++		"ypos"			"r48"	[$X360]
++		"zpos"			"8"
++		"wide"			"140"	[$WIN32]
++		"wide"			"120"	[$X360]
++		"tall"			"30"
++		"visible"		"1"
++		"enabled"		"1"
++		"labelText"		"#TF_PlayingTo"
++		"textAlignment"	"center"
++		"dulltext"		"0"
++		"brighttext"	"0"
++		"font"			"HudFontSmall"
++		"fgcolor"		"TanLight"
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++			
++	"PlayingToBG"
++	{
++		"ControlName"	"CTFImagePanel"
++		"fieldName"		"PlayingToBG"
++		"xpos"			"c-75"	[$WIN32]
++		"xpos"			"c-70"	[$X360]
++		"ypos"			"r50"	[$WIN32]
++		"ypos"			"r51"	[$X360]
++		"zpos"			"7"
++		"wide"			"150"	[$WIN32]
++		"wide"			"140"	[$X360]
++		"tall"			"38"	[$WIN32]
++		"tall"			"35"	[$X360]
++		"visible"		"1"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_bg_playingto"
++		"image_hidef"	"../hud/objectives_flagpanel_bg_playingto_hidef"
++		"scaleImage"	"1"	
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++		}
++		
++		"if_mvm"
++		{
++			"visible"	"0"
++		}
++		
++		"if_specialdelivery"
++		{
++			"visible"	"0"
++		}
++	}	
++		
++	"BlueFlag"
++	{
++		"ControlName"	"CTFFlagStatus"
++		"fieldName"		"BlueFlag"
++		"xpos"			"c-135"
++		"ypos"			"r95"	[$WIN32]
++		"ypos"			"r116"	[$X360]
++		"zpos"			"5"
++		"wide"			"160"
++		"tall"			"90"
++		"visible"		"1"
++		"enabled"		"1"
++		
++		"if_hybrid"
++		{
++			"visible"	"0"
++			"ypos"		"r100"
++		}
++		
++		"if_hybrid_single"
++		{
++			"xpos"		"c-80"
++		}
++		
++		"if_hybrid_double"
++		{
++			"xpos"		"c-115"
++		}
++
++		"if_specialdelivery"
++		{
++			"ypos"		"r100"
++		}
++		
++		"if_no_flags"
++		{
++			"visible"	"0"
++		}
++	}
++			
++	"RedFlag"
++	{
++		"ControlName"	"CTFFlagStatus"
++		"fieldName"		"RedFlag"
++		"xpos"			"c-25"
++		"ypos"			"r95"	[$WIN32]
++		"ypos"			"r116"	[$X360]
++		"zpos"			"5"
++		"wide"			"160"
++		"tall"			"90"
++		"visible"		"1"
++		"enabled"		"1"
++				
++		"if_hybrid"
++		{
++			"visible"	"0"
++			"ypos"		"r100"
++		}
++		
++		"if_hybrid_single"
++		{
++			"xpos"		"c-80"
++		}
++		
++		"if_hybrid_double"
++		{
++			"xpos"		"c-45"
++		}
++
++		"if_specialdelivery"
++		{
++			"ypos"		"r100"
++		}
++		
++		"if_no_flags"
++		{
++			"visible"	"0"
++		}
++	}	
++			
++	"CaptureFlag"
++	{
++		"ControlName"	"CTFArrowPanel"
++		"fieldName"		"CaptureFlag"
++		"xpos"			"c-40"
++		"ypos"			"r95"	[$WIN32]
++		"ypos"			"r116"	[$X360]
++		"zpos"			"5"
++		"wide"			"80"
++		"tall"			"80"
++		"visible"		"0"
++		"enabled"		"1"
++		
++		"if_hybrid"
++		{
++			"ypos"		"r100"
++		}
++		
++		"if_specialdelivery"
++		{
++			"ypos"		"r100"
++		}
++	}
++
++	"PoisonIcon"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"PoisonIcon"
++		"xpos"			"cs-0.5"
++		"ypos"			"r75"
++		"zpos"			"6"
++		"wide"			"40"
++		"tall"			"o1"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"marked_for_death"
++		"scaleImage"	"1"
++	}
++
++	"PoisonTimeLabel"
++	{
++		"ControlName"	"CExLabel"
++		"fieldName"		"PoisonTimeLabel"
++		"xpos"			"cs-0.5"
++		"ypos"			"r65"
++		"zpos"			"6"
++		"wide"			"40"
++		"tall"			"20"
++		"visible"		"0"
++		"enabled"		"1"
++		"textAlignment"	"center"	
++		"labelText"		"%redscore%"
++		"font"			"HudFontMediumBold"
++		"fgcolor"		"TanLight"
++	}
++	
++	"SpecCarriedImage"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"SpecCarriedImage"
++		"xpos"			"c-50"
++		"ypos"			"r137"	[$WIN32]
++		"ypos"			"r158"	[$X360]
++		"zpos"			"10"
++		"wide"			"100"
++		"tall"			"100"
++		"visible"		"0"
++		"enabled"		"1"
++		"image"			"../hud/objectives_flagpanel_carried_red"
++		"scaleImage"	"1"
++	}			
++}
+diff --git a/resource/ui/objectivestatusescort.res b/resource/ui/objectivestatusescort.res
+new file mode 100644
+index 0000000..84b6ffa
+--- /dev/null
++++ b/resource/ui/objectivestatusescort.res
+@@ -0,0 +1,648 @@
++"Resource/UI/ObjectiveStatusEscort.res"
++{	
++	"ObjectiveStatusEscort"
++	{
++		"ControlName"		"EditablePanel"
++		"fieldName"			"ObjectiveStatusEscort"
++		"xpos"				"c-200"
++		"ypos"				"r175"
++		"zpos"				"1"
++		"wide"				"400"
++		"tall"				"150"
++		"visible"			"1"
++		"enabled"			"1"
++		"progress_xpos"		"79"
++		"progress_wide"		"270"
++		
++		"if_multiple_trains"
++		{
++			"ypos"				"r200"
++			"tall"				"200"
++		}
++	}
++	
++	"LevelBar"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"LevelBar"	
++		"xpos"			"73"
++		"ypos"			"123"
++		"zpos"			"0"
++		"wide"			"254"
++		"tall"			"4"
++		"visible"		"1"
++		"enabled"		"1"
++		"labelText"		""
++		"image"			"../hud/cart_track"
++		"scaleImage"	"1"
++		
++		"if_multiple_trains"
++		{
++			"ypos"			"114"
++			"zpos"			"3"
++			"tall"			"12"
++			"image"			"../hud/cart_track_neutral_opaque"
++		}
++		
++		"if_single_with_hills"
++		{
++			"ypos"			"116"
++			"ypos_minmode"	"120"
++			"tall"			"18"
++			"tall_minmode"	"10"
++			"image"			"../hud/cart_track_neutral_opaque"
++		}		
++	}	
++	
++	"ProgressBar"
++	{
++		"ControlName"	"CTFHudEscortProgressBar"
++		"fieldName"		"ProgressBar"	
++		"xpos"			"73"
++		"ypos"			"123"
++		"zpos"			"4"
++		"wide"			"254"
++		"tall"			"4"
++		"visible"		"0"
++		"enabled"		"1"
++		"scaleImage"	"1"
++		
++		"if_multiple_trains"
++		{
++			"ypos"			"114"
++			"zpos"			"6"
++			"tall"			"12"
++			"visible"		"1"
++		}
++	}		
++	
++	"HomeCPIcon"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"HomeCPIcon"	
++		"xpos"			"59"
++		"xpos_minmode"		"64"		
++		"ypos"			"111"
++		"ypos_minmode"		"116"
++		"zpos"			"1"
++		"wide"			"28"
++		"wide_minmode"		"18"
++		"tall"			"28"
++		"tall_minmode"		"18"
++		"autoResize"	"0"
++		"pinCorner"		"0"
++		"visible"		"1"
++		"enabled"		"1"
++		"tabPosition"	"0"
++		"labelText"		""
++		"image"			"../hud/cart_home_blue"
++		"scaleImage"	"1"	
++		
++		"if_team_red"
++		{
++			"image"			"../hud/cart_home_red"
++		}
++		
++		"if_single_with_hills_blue"
++		{
++			"image"			"../hud/cart_home_blue_opaque"
++		}		
++		
++		"if_single_with_hills_red"
++		{
++			"image"			"../hud/cart_home_red_opaque"
++		}		
++		
++		"if_multiple_trains"
++		{
++			"xpos"			"59"
++			"zpos"			"5"
++			"wide"			"14"
++			"tall"			"14"
++			"image"			"../hud/cart_track_neutral_opaque"
++		}
++		
++		"if_multiple_trains_top"
++		{
++			"ypos"			"113"
++		}
++		
++		"if_multiple_trains_bottom"
++		{
++			"ypos"			"113"
++		}
++		
++		"if_multiple_trains_red"
++		{
++			"image"			"../hud/cart_home_red_square"
++		}
++		
++		"if_multiple_trains_blue"
++		{
++			"image"			"../hud/cart_home_blue_square"
++		}
++	}
++	
++	"SimpleControlPointTemplate"
++	{
++		"ControlName"	"ImagePanel"
++		"fieldName"		"SimpleControlPointTemplate"	
++		"xpos"			"60"
++		"xpos_minmode"		"65"		
++		"ypos"			"111"
++		"ypos_minmode"		"116"		
++		"zpos"			"1"
++		"wide"			"28"
++		"wide_minmode"		"18"		
++		"tall"			"28"
++		"tall_minmode"		"18"
++		"autoResize"	"0"
++		"pinCorner"		"0"
++		"visible"		"0"
++		"enabled"		"1"
++		"tabPosition"	"0"
++		"labelText"		""
++		"image"			"../hud/cart_point_neutral"
++		"scaleImage"	"1"	
++												
++		"if_multiple_trains"
++		{
++			"xpos"			"61"
++			"ypos"			"114"
++			"zpos"			"5"	
++			"wide"			"12"
++			"tall"			"12"
++		}
++	}
++
++	"EscortItemPanel"
++	{
++		"ControlName"	"EditablePanel"
++		"fieldName"		"EscortItemPanel"
++		"xpos"			"0"
++		"ypos"			"8"
++		"ypos_minmode"		"48"
++		"zpos"			"2"
++		"wide"			"80"
++		"wide_minmode"		"52"		
++		"tall"			"115"
++		"tall_minmode"		"75"		
++		"visible"		"1"
++		"enabled"		"1"
++				
++		"if_multiple_trains"
++		{
++			"ypos"			"48"
++			"zpos"			"8"
++			"wide"			"52"
++			"tall"			"170"
++		}
++		
++		"RecedeTime"
++		{	
++			"ControlName"	"CExLabel"
++			"fieldName"		"RecedeTime"
++			"font"			"HudFontSmallest"		
++			"font_minmode"		"ItemFontAttribSmall"		
++			"xpos"			"35"
++			"xpos_minmode"		"23"			
++			"ypos"			"82"
++			"ypos_minmode"		"53"			
++			"zpos"			"2"
++			"wide"			"10"
++			"wide_minmode"		"7"
++			"tall"			"10"
++			"tall_minmode"		"7"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"1"
++			"enabled"		"1"
++			"labelText"		"%recede%"
++			"textAlignment"	"center"
++			"dulltext"		"0"
++			"brighttext"	"0"
++			
++			"if_multiple_trains"
++			{
++				"font"			"ItemFontAttribSmall"
++				"xpos"			"21"
++				"wide"			"11"
++				"tall"			"10"
++			}			
++			
++			"if_multiple_trains_top"
++			{
++				"ypos"			"46"
++			}										
++			
++			"if_multiple_trains_bottom"
++			{
++				"ypos"			"82"
++			}
++		}
++		
++		"EscortItemImage"
++		{
++			"ControlName"	"ImagePanel"
++			"fieldName"		"EscortItemImage"	
++			"xpos"			"20"
++			"xpos_minmode"		"13"
++			"ypos"			"77"
++			"ypos_minmode"		"50"
++			"zpos"			"1"
++			"wide"			"40"
++			"wide_minmode"		"26"
++			"tall"			"40"
++			"tall_minmode"		"26"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"1"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		""
++			"image"			"../hud/cart_neutral"
++			"scaleImage"	"1"
++			
++			"if_team_blue"
++			{
++				"image"			"../hud/cart_blue"
++			}		
++			
++			"if_team_red"
++			{
++				"image"			"../hud/cart_red"
++			}
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"11"
++				"ypos"			"43"
++				"wide"			"30"
++				"tall"			"30"
++			}						
++		}
++		
++		"EscortItemImageBottom"
++		{
++			"ControlName"	"ImagePanel"
++			"fieldName"		"EscortItemImageBottom"	
++			"xpos"			"20"
++			"ypos"			"117"
++			"zpos"			"1"
++			"wide"			"40"
++			"tall"			"40"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"0"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		""
++			"image"			"../hud/cart_neutral_bottom"
++			"scaleImage"	"1"	
++			
++			"if_team_blue"
++			{
++				"image"			"../hud/cart_blue_bottom"
++			}			
++			
++			"if_team_red"
++			{
++				"image"			"../hud/cart_red_bottom"
++			}
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"11"
++				"ypos"			"71"
++				"wide"			"30"
++				"tall"			"30"
++			}			
++		}
++		
++		"EscortItemImageAlert"
++		{
++			"ControlName"	"ImagePanel"
++			"fieldName"		"EscortItemImageAlert"	
++			"xpos"			"-4"
++			"ypos"			"38"
++			"zpos"			"0"
++			"wide"			"60"
++			"tall"			"30"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"0"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		""
++			"image"			"../hud/cart_alert"
++			"scaleImage"	"1"
++			
++			"if_multiple_trains_bottom"
++			{
++				"xpos"			"-5"
++				"ypos"			"75"
++			}
++		}
++		
++		"Speed_Backwards"
++		{
++			"ControlName"	"ImagePanel"
++			"fieldName"		"Speed_Backwards"	
++			"xpos"			"35"
++			"xpos_minmode"		"23"
++			"ypos"			"82"
++			"ypos_minmode"		"53"
++			"zpos"			"2"
++			"wide"			"10"
++			"wide_minmode"		"7"
++			"tall"			"10"
++			"tall_minmode"		"7"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"0"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		""
++			"image"			"../hud/cart_arrow_left"
++			"scaleImage"	"1"	
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"22"
++				"wide"			"8"
++				"tall"			"8"
++			}
++			
++			"if_multiple_trains_top"
++			{
++				"ypos"			"46"
++			}	
++			
++			"if_multiple_trains_bottom"
++			{
++				"ypos"			"83"
++			}	
++		}
++		
++		"CapPlayerImage"
++		{
++			"ControlName"	"ImagePanel"		
++			"fieldName"		"CapPlayerImage"
++			"xpos"			"33"
++			"xpos_minmode"		"20"
++			"ypos"			"80"
++			"ypos_minmode"		"52"
++			"zpos"			"3"
++			"wide"			"6"
++			"wide_minmode"		"4"
++			"tall"			"12"
++			"tall_minmode"		"8"
++			"visible"		"0"
++			"enabled"		"1"
++			"image"			"capture_icon_white"
++			"scaleImage"	"1"
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"20"
++				"wide"			"5"
++				"tall"			"10"
++			}
++			
++			"if_multiple_trains_top"
++			{
++				"ypos"			"45"
++			}	
++			
++			"if_multiple_trains_bottom"
++			{
++				"ypos"			"81"
++			}	
++		}
++
++		"CapNumPlayers"
++		{	
++			"ControlName"	"CExLabel"
++			"fieldName"		"CapNumPlayers"
++			"font"			"HudFontSmallest"
++			"font_minmode"		"ItemFontAttribSmall"
++			"xpos"			"39"
++			"xpos_minmode"		"25"
++			"ypos"			"82"
++			"ypos_minmode"		"53"
++			"zpos"			"4"
++			"wide"			"30"
++			"wide_minmode"		"20"
++			"tall"			"10"
++			"tall_minmode"		"7"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"0"
++			"enabled"		"1"
++			"labelText"		"#ControlPointIconCappers"
++			"textAlignment"	"west"
++			"dulltext"		"0"
++			"brighttext"	"0"
++			
++			"if_multiple_trains"
++			{
++				"font"			"ItemFontAttribSmall"
++				"xpos"			"25"
++				"wide"			"30"
++				"tall"			"10"
++			}			
++			
++			"if_multiple_trains_top"
++			{
++				"ypos"			"46"
++			}										
++			
++			"if_multiple_trains_bottom"
++			{
++				"ypos"			"82"
++			}	
++		}
++		
++		"Blocked"
++		{
++			"ControlName"	"ImagePanel"
++			"fieldName"		"Blocked"	
++			"xpos"			"35"
++			"xpos_minmode"		"23"
++			"ypos"			"82"
++			"ypos_minmode"		"53"
++			"zpos"			"2"
++			"wide"			"10"
++			"wide_minmode"		"7"
++			"tall"			"10"
++			"tall_minmode"		"7"
++			"autoResize"	"0"
++			"pinCorner"		"0"
++			"visible"		"0"
++			"enabled"		"1"
++			"tabPosition"	"0"
++			"labelText"		""
++			"image"			"../hud/cart_blocked"
++			"scaleImage"	"1"	
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"22"
++				"wide"			"8"
++				"tall"			"8"
++			}
++			
++			"if_multiple_trains_top"
++			{
++				"ypos"			"46"
++			}	
++			
++			"if_multiple_trains_bottom"
++			{
++				"ypos"			"83"
++			}
++		}
++	
++		"EscortTeardrop"
++		{
++			"ControlName"		"EditablePanel"
++			"fieldName"			"EscortTeardrop"
++			"xpos"				"13"
++			"xpos_minmode"			"9"
++			"ypos"				"13"
++			"ypos_minmode"			"8"			
++			"zpos"				"20"
++			"wide"				"100"
++			"wide_minmode"			"65"			
++			"tall"				"65"
++			"tall_minmode"			"42"			
++			"visible"			"0"
++			"enabled"			"1"
++			
++			"if_multiple_trains"
++			{
++				"xpos"			"9"
++				"ypos"			"2"			
++				"wide"			"65"			
++				"tall"			"42"			
++			}	
++						
++			"Teardrop"
++			{
++				"ControlName"		"CIconPanel"
++				"fieldName"			"Teardrop"
++				"xpos"				"0"
++				"ypos"				"0"
++				"zpos"				"0"
++				"wide"				"54"
++				"wide_minmode"			"35"				
++				"tall"				"65"
++				"tall_minmode"			"42"
++				"visible"			"1"
++				"enabled"			"1"
++				"scaleImage"		"1"
++				"icon"				"cappoint_progressbar_teardrop"
++				"iconColor"			"255 255 255 255"
++				
++				"if_multiple_trains"
++				{
++					"xpos"			"0"
++					"ypos"			"0"			
++					"wide"			"35"			
++					"tall"			"42"			
++				}	
++			}
++
++			"ProgressText"
++			{	
++				"ControlName"		"Label"
++				"fieldName"			"ProgressText"
++				"font"				"DefaultSmall"
++				"font_minmode"			"DefaultVerySmall"
++				"xpos"				"0"
++				"ypos"				"8"
++				"ypos_minmode"			"3"
++				"zpos"				"23"
++				"wide"				"54"
++				"wide_minmode"			"35"
++				"tall"				"40"
++				"tall_minmode"			"28"
++				"autoResize"		"0"
++				"pinCorner"			"0"
++				"visible"			"0"
++				"enabled"			"1"
++				"labelText"			"progress"
++				"dulltext"			"0"
++				"brighttext"		"0"
++				"centerwrap"		"1"
++				
++				"if_multiple_trains"
++				{
++					"font"			"DefaultVerySmall"
++					"xpos"			"0"
++					"ypos"			"3"			
++					"wide"			"35"			
++					"tall"			"28"			
++				}	
++			}
++
++			"Blocked"
++			{
++				"ControlName"		"CIconPanel"
++				"fieldName"			"Blocked"
++				"xpos"				"2"
++				"ypos"				"3"
++				"ypos_minmode"			"2"	
++				"zpos"				"1"
++				"wide"				"50"
++				"wide_minmode"			"31"
++				"tall"				"50"
++				"tall_minmode"			"31"
++				"visible"			"1"
++				"enabled"			"1"
++				"scaleImage"		"1"
++				"icon"				"cappoint_progressbar_blocked"
++				"iconColor"			"255 255 255 255"	
++				
++				"if_multiple_trains"
++				{
++					"xpos"			"2"
++					"ypos"			"2"			
++					"wide"			"31"			
++					"tall"			"31"			
++				}	
++			}	
++			
++			"Capping"
++			{
++				"ControlName"	"ImagePanel"
++				"fieldName"		"Capping"	
++				"xpos"			"12"
++				"xpos_minmode"		"8"
++				"ypos"			"13"
++				"ypos_minmode"		"8"
++				"zpos"			"1"
++				"wide"			"30"
++				"wide_minmode"		"20"
++				"tall"			"30"
++				"tall_minmode"		"20"
++				"autoResize"	"0"
++				"pinCorner"		"0"
++				"visible"		"0"
++				"enabled"		"1"
++				"tabPosition"	"0"
++				"labelText"		""
++				"image"			"../hud/cart_arrow_right"
++				"scaleImage"	"1"	
++				
++				"if_multiple_trains"
++				{
++					"xpos"			"8"
++					"ypos"			"8"			
++					"wide"			"20"			
++					"tall"			"20"			
++				}		
++			}			
++		}
++	}
++}
+diff --git a/resource/ui/objectivestatusmultipleescort.res b/resource/ui/objectivestatusmultipleescort.res
+new file mode 100644
+index 0000000..f1ca06a
+--- /dev/null
++++ b/resource/ui/objectivestatusmultipleescort.res
+@@ -0,0 +1,54 @@
++"Resource/UI/ObjectiveStatusMultipleEscort.res"
++{	
++	"ObjectiveStatusMultipleEscort"
++	{
++		"ControlName"		"EditablePanel"
++		"fieldName"			"ObjectiveStatusMultipleEscort"
++		"xpos"				"0"
++		"ypos"				"0"
++		"wide"				"f0"
++		"tall"				"480"
++		"visible"			"1"
++		"enabled"			"1"
++	}
++	
++	"BlueEscortPanel"
++	{
++		"ControlName"		"CTFHudEscort"
++		"fieldName"			"BlueEscortPanel"
++		"xpos"				"c-200"
++		"ypos"				"r175"
++		"zpos"				"1"
++		"wide"				"400"
++		"tall"				"200"
++		"visible"			"1"
++		"enabled"			"1"
++		"progress_xpos"		"79"
++		"progress_wide"		"270"
++		
++		"if_blue_is_top"
++		{
++			"ypos"				"r190"
++		}
++	}
++
++	"RedEscortPanel"
++	{
++		"ControlName"		"CTFHudEscort"
++		"fieldName"			"RedEscortPanel"
++		"xpos"				"c-200"
++		"ypos"				"r175"
++		"zpos"				"1"
++		"wide"				"400"
++		"tall"				"200"
++		"visible"			"1"
++		"enabled"			"1"
++		"progress_xpos"		"79"
++		"progress_wide"		"270"
++		
++		"if_red_is_top"
++		{
++			"ypos"				"r190"
++		}
++	}
++}
+diff --git a/resource/ui/targetid.res b/resource/ui/targetid.res
+index 04ac122..3eab4da 100644
+--- a/resource/ui/targetid.res
++++ b/resource/ui/targetid.res
+@@ -5,14 +5,14 @@
+ 		"ControlName"		"CTFImagePanel"
+ 		"fieldName"		"TargetIDBG"
+ 		"xpos"			"0"
+-		"ypos"			"0"
++		"ypos"			"1"
+ 		"zpos"			"-1"
+ 		"wide"			"252"
+ 		"tall"	 		"50"
+ 		"autoResize"		"0"
+ 		"pinCorner"		"0"
+-		"visible"		"1"
+-		"enabled"		"1"
++		"visible"		"0"
++		"enabled"		"0"
+ 		"image"			"../hud/color_panel_brown"
+ 		"scaleImage"		"1"
+ 		"teambg_1"		"../hud/color_panel_brown"
+@@ -21,10 +21,10 @@
+ 		"teambg_3"		"../hud/color_panel_blu"
+ 		"teambg_3_lodef"	"../hud/color_panel_blu"
+ 		
+-		"src_corner_height"		"23"				// pixels inside the image
++		"src_corner_height"		"15"				// pixels inside the image
+ 		"src_corner_width"		"23"
+ 			
+-		"draw_corner_width"		"5"				// screen size of the corners ( and sides ), proportional
++		"draw_corner_width"		"8"				// screen size of the corners ( and sides ), proportional
+ 		"draw_corner_height" 	"5"	
+ 	}
+ 	"TargetIDBG_Spec_Blue"
+@@ -76,12 +76,12 @@
+ 	{	
+ 		"ControlName"		"Label"
+ 		"fieldName"		"TargetNameLabel"
+-		"font"			"HudFontSmall"
++		"font"			"TFFontLarge"
+ 		"font_minmode"	"TFFontLarge"
+ 		"xpos"			"8"
+ 		"xpos_minmode"	"30"
+-		"ypos"			"5"
+-		"ypos_minmode"	"5"
++		"ypos"			"8"
++		"ypos_minmode"	"8"
+ 		"zpos"			"1"
+ 		"wide"			"640"
+ 		"tall"			"24"
+@@ -98,8 +98,8 @@
+ 	{	
+ 		"ControlName"		"Label"
+ 		"fieldName"		"TargetDataLabel"
+-		"font"			"FontStoreOriginalPrice"
+-		"font_minmode"	"DefaultVerySmall"
++		"font"			"TFFontLarge"
++		"font_minmode"	"TFFontLarge"
+ 		"xpos"			"8"
+ 		"xpos_minmode"	"30"
+ 		"ypos"			"17"	[$WIN32]
+@@ -114,7 +114,7 @@
+ 		"visible"		"1"
+ 		"enabled"		"1"
+ 		"labelText"		"%targetdata%"
+-		"textAlignment"		"Left"
++		"textAlignment"		"Right"
+ 		"dulltext"		"0"
+ 		"brighttext"		"0"
+ 	}
+@@ -122,16 +122,16 @@
+ 	{
+ 		"ControlName"		"EditablePanel"
+ 		"fieldName"		"SpectatorGUIHealth"
+-		"xpos"			"3"
++		"xpos"			"6"
+ 		"xpos_minmode"	"0"
+-		"ypos"			"2"
++		"ypos"			"3"
+ 		"ypos_minmode"	"0"
+ 		"wide"			"32"
+ 		"tall"			"32"
+ 		"visible"		"0"
+ 		"enabled"		"0"	
+ 		"HealthBonusPosAdj"	"10"
+-		"HealthDeathWarning"	"0.49"
++		"HealthDeathWarning"	"0.70"
+ 		"TFFont"		"HudFontSmall"
+ 		"HealthDeathWarningColor"	"HUDDeathWarning"
+ 		"TextColor"		"HudOffWhite"
+diff --git a/scripts/hudanimations_manifest.txt b/scripts/hudanimations_manifest.txt
+index 5ae629b..37a43b8 100644
+--- a/scripts/hudanimations_manifest.txt
++++ b/scripts/hudanimations_manifest.txt
+@@ -2,7 +2,7 @@ hudanimations_manifest
+ {
+ 	"file"		"scripts/hudanimations_TF2HUD.Fixes-communityFULLFIX.txt"
+ 	"file"		"scripts/hudanimations.txt"
+-	"file"		"advanced/scripts/hudanimations_tf - small uber value.txt"
++	"file"		"advanced/scripts/hudanimations_tf - large uber value.txt"
+ 	"file"		"scripts/hudanimations_tf - idhud.txt"
+ 	"file"		"scripts/hudanimations_tf.txt"
+ }
+diff --git a/scripts/hudcrosshairs.res b/scripts/hudcrosshairs.res
+index 26d6526..f1f194a 100644
+--- a/scripts/hudcrosshairs.res
++++ b/scripts/hudcrosshairs.res
+@@ -16,7 +16,7 @@
+ 		"ypos"				"c-101"
+ 		"wide"				"201"
+ 		"tall"				"200"
+-		"font"				"CrosshairsOutline16"
++		"font"				"TF2Crosshairs"
+ 		"labelText"			"a"
+ 		"textAlignment"		"center"
+ 		"fgcolor"			"CustomWhite"
+@@ -33,7 +33,7 @@
+ 		"ypos"				"c-101"
+ 		"wide"				"202"
+ 		"tall"				"200"
+-		"font"				"CrosshairsOutline16"
++		"font"				"TF2Crosshairs"
+ 		"labelText"			"b"
+ 		"textAlignment"		"center"
+ 		"fgcolor"			"CustomWhite"
+@@ -50,7 +50,7 @@
+ 		"ypos"				"c-101"
+ 		"wide"				"202"
+ 		"tall"				"200"
+-		"font"				"CrosshairsOutline16"
++		"font"				"TF2Crosshairs"
+ 		"labelText"			"c"
+ 		"textAlignment"		"center"
+ 		"fgcolor"			"CustomWhite"
+@@ -84,7 +84,7 @@
+ 		"ypos"				"c-101"
+ 		"wide"				"201"
+ 		"tall"				"200"
+-		"font"				"CrosshairsOutline16"
++		"font"				"TF2Crosshairs"
+ 		"labelText"			"e"
+ 		"textAlignment"		"center"
+ 		"fgcolor"			"CustomWhite"
+@@ -172,7 +172,7 @@
+ 		"font"				"Crosshairs25"
+ 		"labelText"			"j"
+ 		"textAlignment"		"center"
+-		"fgcolor"			"CustomWhite"
++		"fgcolor"			"00FF00"
+ 	}
+ 
+ 	Dot						//1.11
+diff --git a/scripts/hudlayout.res b/scripts/hudlayout.res
+index a170253..7393ea0 100644
+--- a/scripts/hudlayout.res
++++ b/scripts/hudlayout.res
+@@ -1,5 +1,4 @@
+ "#base"		"../basefiles/hudlayout.res"
+-"#base"		"../scripts/hudcrosshairs.res"
+ "Resource/HudLayout.res"
+ {
+ 	"HudMedicCharge"
+diff --git a/sound/sound.cache b/sound/sound.cache
+index bf74de492492a095b37aa3dbe409adb3c3966b56..96a982a702655e7dbde666bc44757691396a541a 100644
+GIT binary patch
+literal 16
+UcmZQ#U|?Vc;_Zi29{?!^01&VOh5!Hn
+
+literal 52
+scmZQ#U|?Vc;_Zi2A20%G1t2cYFU?DdVW@n+D~XW_$cKUdKmcL`01#dauK)l5
+
+-- 
+2.40.1.windows.1
+
