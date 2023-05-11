@@ -1,7 +1,7 @@
-From a2430ec2d83b8b1724e864e0c361fe71ea6bec60 Mon Sep 17 00:00:00 2001
+From fa2aef016e8f71726d9fa13622ebf4aab6eb329d Mon Sep 17 00:00:00 2001
 From: Ivan Kh <47220198+Ivan-Khar@users.noreply.github.com>
-Date: Fri, 5 May 2023 12:27:41 +0300
-Subject: My custom modification
+Date: Thu, 11 May 2023 19:36:08 +0300
+Subject: [PATCH] My modification 1
 
 ---
  basefiles/hudlayout.res                       |  34 +-
@@ -12,8 +12,9 @@ Subject: My custom modification
  resource/fonts/FuturaBookC.ttf                | Bin 0 -> 22196 bytes
  resource/fonts/FuturaLightC.ttf               | Bin 0 -> 21584 bytes
  resource/ui/controlpointicon.res              |   4 +-
- resource/ui/huddamageaccount.res              |  10 +-
- resource/ui/huddemomanpipes.res               | 235 +++++++
+ resource/ui/huddamageaccount.res              |  27 +-
+ resource/ui/huddemomancharge.res              |  23 +
+ resource/ui/huddemomanpipes.res               | 236 +++++++
  resource/ui/huditemeffectmeter_killstreak.res | 102 +++
  resource/ui/hudmatchstatus.res                | 234 ++++---
  resource/ui/hudmenutauntselection.res         | 134 ++--
@@ -22,15 +23,17 @@ Subject: My custom modification
  resource/ui/objectivestatusmultipleescort.res |  54 ++
  resource/ui/targetid.res                      |  28 +-
  scripts/hudanimations_manifest.txt            |   2 +-
+ scripts/hudanimations_tf - idhud.txt          |   6 +
  scripts/hudcrosshairs.res                     |  10 +-
  scripts/hudlayout.res                         |   1 -
  sound/sound.cache                             | Bin 52 -> 16 bytes
- 21 files changed, 2013 insertions(+), 213 deletions(-)
+ 23 files changed, 2060 insertions(+), 213 deletions(-)
  create mode 100644 materials/HUD/hud_none.vmt
  create mode 100644 materials/HUD/hud_none.vtf
  create mode 100644 resource/fonts/Cerbetica_edited.ttf
  create mode 100644 resource/fonts/FuturaBookC.ttf
  create mode 100644 resource/fonts/FuturaLightC.ttf
+ create mode 100644 resource/ui/huddemomancharge.res
  create mode 100644 resource/ui/huddemomanpipes.res
  create mode 100644 resource/ui/huditemeffectmeter_killstreak.res
  create mode 100644 resource/ui/hudobjectiveflagpanel.res
@@ -1350,7 +1353,7 @@ index 656cdce..9241059 100644
  		"visible"	"1"
  		"enabled"	"1"
 diff --git a/resource/ui/huddamageaccount.res b/resource/ui/huddamageaccount.res
-index 69cf478..e355c50 100644
+index 69cf478..8a965ea 100644
 --- a/resource/ui/huddamageaccount.res
 +++ b/resource/ui/huddamageaccount.res
 @@ -7,9 +7,9 @@
@@ -1381,12 +1384,63 @@ index 69cf478..e355c50 100644
  		"tall"			"50"
  
  		"font"			"crosshair40"
+@@ -39,4 +39,21 @@
+ 		"fgcolor"		"255 30 30 220"
+ 	}
+ 	//////////////////////// HitMarker end ////////////////////////
++	
++	"DamageAccountValue"
++	{
++		"ControlName"		"CExLabel"
++		"fieldName"			"DamageAccountValue"
++		"xpos"				"c-52"
++		"ypos"				"c25"
++		"zpos"				"2"
++		"wide"				"101"
++		"tall"				"26"
++		"visible"			"1"
++		"enabled"			"1"
++		"labelText"			"%metal%"
++		"textAlignment"		"center"
++		"fgcolor"			"255 255 0 255"
++		"font"				"FuturaBook20"
++	}
+ }
+diff --git a/resource/ui/huddemomancharge.res b/resource/ui/huddemomancharge.res
+new file mode 100644
+index 0000000..c453709
+--- /dev/null
++++ b/resource/ui/huddemomancharge.res
+@@ -0,0 +1,23 @@
++"Resource/UI/HudDemomanCharge.res"
++{	
++	"ChargeMeter"
++	{	
++		"ControlName"	"ContinuousProgressBar"
++		"fieldName"		"ChargeMeter"
++		"font"			"Default"
++		"xpos"			"10"
++		"xpos_minmode"	"0"
++		"ypos"			"0"
++		"zpos"			"2"
++		"wide"			"53"
++		"tall"			"6"				
++		"autoResize"	"0"
++		"pinCorner"		"0"
++		"visible"		"1"
++		"enabled"		"1"
++		"textAlignment"	"Left"
++		"fgcolor_override"		"255 255 0 63"
++		"dulltext"		"0"
++		"brighttext"	"0"
++	}					
++}
 diff --git a/resource/ui/huddemomanpipes.res b/resource/ui/huddemomanpipes.res
 new file mode 100644
-index 0000000..0eec699
+index 0000000..0d76091
 --- /dev/null
 +++ b/resource/ui/huddemomanpipes.res
-@@ -0,0 +1,235 @@
+@@ -0,0 +1,236 @@
 +"Resource/UI/HudDemomanPipes.res"
 +{
 +	"background"
@@ -1454,6 +1508,7 @@ index 0000000..0eec699
 +		"textAlignment"			"Left"
 +		"dulltext"				"0"
 +		"brighttext"			"0"
++		"fgcolor_override"		"255 255 0 63"
 +	}				
 +		
 +	"PipesPresentPanel"
@@ -3838,6 +3893,22 @@ index 5ae629b..37a43b8 100644
  	"file"		"scripts/hudanimations_tf - idhud.txt"
  	"file"		"scripts/hudanimations_tf.txt"
  }
+diff --git a/scripts/hudanimations_tf - idhud.txt b/scripts/hudanimations_tf - idhud.txt
+index 22b92aa..e71b61a 100644
+--- a/scripts/hudanimations_tf - idhud.txt	
++++ b/scripts/hudanimations_tf - idhud.txt	
+@@ -62,4 +62,10 @@ Animate PlayerStatusSpyOutlineImage        Alpha "255" Linear 0.0 0.2
+  Animate PlayerStatusSpyOutlineImage		Size		"150 150"		Linear 0.0 0.2
+ 
+  RunEvent HudSpyDisguiseHide	0.7
++}
++
++event DamagedPlayer
++{
++	animate DamageLabel alpha "255" Linear 0.0 0.0
++	animate DamageLabel alpha "0" Linear 0.5 0.5
+ }
+\ No newline at end of file
 diff --git a/scripts/hudcrosshairs.res b/scripts/hudcrosshairs.res
 index 26d6526..f1f194a 100644
 --- a/scripts/hudcrosshairs.res
