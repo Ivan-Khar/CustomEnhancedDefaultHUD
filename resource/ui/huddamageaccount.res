@@ -40,20 +40,20 @@
 	}
 	//////////////////////// HitMarker end ////////////////////////
 	
-	"DamageAccountValue"
-	{
-		"ControlName"		"CExLabel"
-		"fieldName"			"DamageAccountValue"
-		"xpos"				"c-52"
-		"ypos"				"c25"
-		"zpos"				"2"
-		"wide"				"101"
-		"tall"				"26"
-		"visible"			"1"
-		"enabled"			"1"
-		"labelText"			"%metal%"
-		"textAlignment"		"center"
-		"fgcolor"			"255 255 0 255"
-		"font"				"FuturaBook20"
-	}
+//	"DamageAccountValue"
+//	{
+//		"ControlName"		"CExLabel"
+//		"fieldName"			"DamageAccountValue"
+//		"xpos"				"c-52"
+//		"ypos"				"c25"
+//		"zpos"				"2"
+//		"wide"				"101"
+//		"tall"				"26"
+//		"visible"			"1"
+//		"enabled"			"1"
+//		"labelText"			"%metal%"
+//		"textAlignment"		"center"
+//		"fgcolor"			"255 255 0 255"
+//		"font"				"FuturaBook20"
+//	}
 }
