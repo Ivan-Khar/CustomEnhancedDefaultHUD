@@ -923,6 +923,18 @@ Scheme
 				"range"		"0x0000 0xFFFF"
 			}
 		}
+		"juliaSmaller"
+		{
+			"1"
+			{
+				"name"		"Nimbus"
+				"tall"		"12"
+				"antialias" "1"
+				"custom"	"1"
+				"weight"	"0"
+				"range"		"0x0000 0xFFFF"
+			}
+		}
 	}
 
 	CustomFontFiles

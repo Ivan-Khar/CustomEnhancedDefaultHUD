@@ -64,8 +64,3 @@ Animate PlayerStatusSpyOutlineImage        Alpha "255" Linear 0.0 0.2
  RunEvent HudSpyDisguiseHide	0.7
 }
 
-event DamagedPlayer
-{
-	animate DamageLabel alpha "255" Linear 0.0 0.0
-	animate DamageLabel alpha "0" Linear 0.5 0.5
-}

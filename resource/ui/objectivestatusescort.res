@@ -1,4 +1,4 @@
-"Resource/UI/ObjectiveStatusEscort.res"
+"Resource/ui/objectivestatusescort.res"
 {
 	"ObjectiveStatusEscort"
 	{
@@ -16,6 +16,7 @@
 
 		"if_multiple_trains"
 		{
+			"ypos"				"r80"
 		}
 	}
 
@@ -180,7 +181,7 @@
 
 		"if_multiple_trains_bottom"
 		{
-			wide 64
+			wide 32
 			ypos 36
 		}
 
@@ -238,6 +239,14 @@
 			{
 				"image"			"replay/thumbnails/obj/cartRed"
 			}
+			
+			"if_multiple_trains"
+			{
+				"xpos"			"4"
+				"ypos"			"39"
+				"wide"			"24"
+				"tall"			"24"
+			}
 		}
 
 		"EscortItemImageBottom"
@@ -266,6 +275,14 @@
 			"if_team_red"
 			{
 				"image"			"replay/thumbnails/obj/cartRedBottom"
+			}
+			
+			"if_multiple_trains"
+			{
+				"xpos"			"4"
+				"ypos"			"33"
+				"wide"			"24"
+				"tall"			"24"
 			}
 		}
 
@@ -307,10 +324,15 @@
 			"image"			"replay/thumbnails/obj/leftHUD"
 			"scaleImage"	"1"
 
+			"if_multiple_trains_top"
+			{
+				"ypos"			"28"
+			}
+			
 			"if_multiple_trains_bottom"
 			{
-				"ypos"			"42"
-				"xpos"			"28"
+				"ypos"			"39"
+				"zpos"			"10"
 			}
 		}
 
@@ -342,9 +364,18 @@
 			fgcolor "255 255 255 255"
 			fgcolor_override "255 255 255 255"
 
+			"if_multiple_trains_top"
+			{
+				"font"			"juliaSmaller"
+				"xpos"			"1"
+				"ypos"			"41"
+			}
+			
 			"if_multiple_trains_bottom"
 			{
-				"ypos"			"42"
+				"font"			"juliaSmaller"
+				"xpos"			"1"
+				"ypos"			"38"
 			}
 		}
 
@@ -366,10 +397,23 @@
 			"image"			"replay/thumbnails/obj/no"
 			"scaleImage"	"1"
 
+			"if_multiple_trains_top"
+			{
+				"xpos"			"10"
+				"ypos"			"43"
+				"zpos"			"20"
+				
+				"wide"			"12"
+				"tall"			"12"
+			}
 			"if_multiple_trains_bottom"
 			{
-				"ypos"			"42"
-				"xpos"			"26"
+				"ypos"			"40"
+				"xpos"			"10"
+				"zpos"			"20"
+			
+				"wide"			"12"
+				"tall"			"12"
 			}
 		}
 
@@ -417,18 +461,18 @@
 			{
 				"ControlName"		"CIconPanel"
 				"fieldName"			"Blocked"
-			"xpos"			"8"
-			"ypos"			"18"
-			"zpos"			"1"
-			"wide"			"0"
-			"tall"			"0"
-			"autoResize"	"0"
-			"pinCorner"		"0"
-			"visible"		"0"
-			"enabled"		"1"
+				"xpos"			"8"
+				"ypos"			"18"
+				"zpos"			"1"
+				"wide"			"0"
+				"tall"			"0"
+				"autoResize"	"0"
+				"pinCorner"		"0"
+				"visible"		"0"
+				"enabled"		"1"
 				"tabPosition"	"0"
 				"icon"				"cappoint_progressbar_blocked"
-			"scaleImage"	"1"
+				"scaleImage"	"1"
 				"iconColor"			"blank"
 			}
 
@@ -449,6 +493,10 @@
 				"labelText"		""
 				"image"			"replay/thumbnails/obj/rightHUD"
 				"scaleImage"	"1"
+				"if_multiple_trains"
+				{
+					"ypos"			"28"
+				}
 			}
 		}
 	}
