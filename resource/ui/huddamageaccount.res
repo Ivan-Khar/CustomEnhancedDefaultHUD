@@ -29,14 +29,14 @@
 		"enabled"		"1"
 		"visible"		"1"
 
-		"xpos"			"c-28"
-		"ypos"			"c-25"
-		"wide"			"54"
+		"xpos"			"c-25"
+		"ypos"			"c-26"
+		"wide"			"50"
 		"tall"			"50"
 
-		"font"			"crosshair40"
-		"labelText"		"o"
-		"fgcolor"		"255 30 30 220"
+		"font"			"CrosshairsOutline32"
+		"labelText"		"k"
+		"fgcolor"		"255 00 00 255"
 	}
 	//////////////////////// HitMarker end ////////////////////////
 	

@@ -846,9 +846,9 @@
 		"tall"					"200"
 		"visible"				"1"
 		"enabled"				"1"
-		"separator_width"		"3"	// distance between the icons (including their backgrounds)
-		"separator_height"		"35"
-		"height_offset"			"0"	[$WIN32] // distance from the bottom of the panel
+		"separator_width"		"4"	// distance between the icons (including their backgrounds)
+		"separator_height"		"8"
+		"height_offset"			"32"	[$WIN32] // distance from the bottom of the panel
 		"height_offset"			"26"	[$X360]
 	}
 
