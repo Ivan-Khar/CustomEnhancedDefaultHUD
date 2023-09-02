@@ -40,7 +40,7 @@
 	}
 	"CustomFontFiles"
 	{
-		"12"
+		"13"
 		{
 			"font"		"resource/TF2Build.ttf"
 			"name"		"TF2 Build"
@@ -100,11 +100,6 @@
 			{
 				"range"		"0x0000 0x0451"
 			}
-		}
-		"13"
-		{
-			"font"		"resource/crosshairs.ttf"
-			"name"		"broeselhud Crosshairs"
 		}
 	}
 }

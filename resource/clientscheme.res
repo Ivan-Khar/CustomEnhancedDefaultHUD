@@ -843,24 +843,24 @@ Scheme
 			"font" "resource/fonts/Surface.otf"
 			"name" "Surface"
 		}
-		"12"
+		"9"
 		{
 			"font" "resource/fonts/Cerbetica_edited.ttf"
 			"name" "Cerbetica_edited"
 		}
-		"13"
+		"10"
 		{
 			"font" "resource/fonts/FuturaBookC.ttf"
 			"name" "FuturaBook"
 		}
-		"14"
+		"11"
 		{
 			"font" "resource/fonts/FuturaLightC.ttf"
 			"name" "FuturaLight"
 		}
-		"15"
+		"12"
 		{
-			"font" "fonts/nimbus.ttf"
+			"font" "resource/fonts/nimbus.ttf"
 			"name" "Nimbus"
 			"range" "0x0000 0xFFFFF"
 			"turkish"
@@ -924,9 +924,18 @@ Scheme
 }
 
 "#base"		"clientscheme_lionHUD-master.res"
-
 "#base"		"clientscheme_TF2HUD.Fixes-communityFULLFIX.res"
-
 "#base"		"clientscheme_eve hud.res"
-
 "#base"		"clientscheme_toonhud.res"
+
+//===========================================================================================================================
+// CROSSHAIR SCHEME EXPLANATIONS
+//---------------------------------------------------------------------------------------------------------------------------
+// In order to prevent any lag some of the less common font schemes featuring properties like blur are disabled by default
+// Uncomment any needed scheme by removing the // and make sure to comment any unused scheme to maximize the hud performance!
+//===========================================================================================================================
+
+//"#base" "crosshair_outline.res"
+//"#base" "crosshair_blur.res"
+//"#base" "crosshair_dropshadow.res"
+"#base" "crosshair_main.res"

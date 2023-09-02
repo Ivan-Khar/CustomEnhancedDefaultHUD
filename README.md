@@ -4,8 +4,10 @@
 * HUD: https://gamebanana.com/mods/385807
 * Bottom Match HUD: https://www.teamfortress.tv/50749/swissolos-custom-match-hud
 * Payload HUD: https://github.com/juliastumpf/payload
+* Custom HUD crosshairs: https://github.com/Hypnootize/TF2-HUD-Crosshairs
+![Custom Crosshairs](https://raw.githubusercontent.com/Hypnootize/TF2-Hud-Crosshairs/master/crosshairs/TF2Crosshairs.png)
 
-## Screenshots:
+## Screenshots(outdated):
 <details><summary>open me</summary>
 
 ![Unobstructive healing target overlay + HUD itself](https://user-images.githubusercontent.com/47220198/236429471-0ec7e0dd-1b8d-478d-96b1-53ae592767bd.jpg)
