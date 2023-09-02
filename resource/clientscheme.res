@@ -16,117 +16,6 @@ Scheme
 
 	Fonts
 	{
-
-		"Crosshairs24"							//1.17; 
-		{										//There and below — crosshair number in the table
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"24"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-			}
-		}
-		"Crosshairs25"							//1.10; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"25"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-			}
-		}
-		"Crosshairs28"							//1.8; 1.13; 1.14; 1.15; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"28"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-			}
-		}
-		"Crosshairs32"							//1.9; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"32"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-			}
-		}
-		"CrosshairsOutline32"					//1.11; 1.12; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"24"
-				"antialias"		"0"
-				"additive"		"0"
-				"outline"		"1"
-			}
-		}
-		"CrosshairsOutline15"					//1.4; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"15"
-				"antialias" 	"0"
-				"additive"		"0"
-				"outline"		"1"
-			}
-		}
-		"CrosshairsOutline16"					//1.1; 1.2; 1.3; 1.5; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"16"
-				"antialias"		"0"
-				"additive"		"0"
-				"outline"		"1"
-			}
-		}
-		"CrosshairsOutline24"					//1.6; 1.7; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"24"
-				"antialias"		"0"
-				"additive"		"0"
-				"outline"		"1"
-			}
-		}
-		"KonrWings"								//2.1;
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"18"
-				"weight"		"0"
-				"antialias"		"1"
-			}
-		}
-		"CODHitmarker"							//3.1; 3.2; 3.3; 3.4; 
-		{
-			"1"
-			{
-				"name"			"xhairs"
-				"tall"			"6"
-				"weight"		"500"
-				"additive"		"0"
-				"antialias"		"1"
-				"outline"		"0"
-			}
-		}
 		"Surface14"
 		{
 			"1"
@@ -188,55 +77,6 @@ Scheme
 				"additive"		"0"
 				"antialias"		"1"
 				"outline"		"1"
-			}
-		}
-		"Padlock"								//RCON icon
-		{
-			"1"
-			{
-				"name"			"padlocks"
-				"tall"			"14"
-				"antialias"		"1"
-				"additive"		"0"
-			}
-		}
-		"Seeker"
-		{
-			"1"
-			{
-				"name"			"tf2cross"
-				"tall"			"12"
-				"weight"		"0"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-				"dropshadow"	"0"
-			}
-		}
-		"SeekerOutline"
-		{
-			"1"
-			{
-				"name"			"tf2cross"
-				"tall"			"12"
-				"weight"		"0"
-				"antialias"		"0"
-				"additive"		"0"
-				"outline"		"1"
-				"dropshadow"	"0"
-			}
-		}
-		"SeekerShadow"
-		{
-			"1"
-			{
-				"name"			"tf2cross"
-				"tall"			"12"
-				"weight"		"0"
-				"antialias"		"1"
-				"additive"		"0"
-				"outline"		"0"
-				"dropshadow"	"1"
 			}
 		}
 		"DefaultOutline"
@@ -1002,21 +842,6 @@ Scheme
 		{
 			"font" "resource/fonts/Surface.otf"
 			"name" "Surface"
-		}
-		"9"
-		{
-			"font" "resource/fonts/xhairs.otf"
-			"name" "xhairs"
-		}
-		"10"
-		{
-			"font" "resource/fonts/padlocks.ttf"
-			"name" "padlocks"
-		}
-		"11"
-		{
-			"font" "resource/fonts/tf2cross.ttf"
-			"name" "tf2cross"
 		}
 		"12"
 		{
