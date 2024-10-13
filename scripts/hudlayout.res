@@ -1,69 +1,30 @@
 "#base"		"../basefiles/hudlayout.res"
 "Resource/HudLayout.res"
 {
-// Doesnt work on dx81
-//	"TransparentViewmodelMask"
-//	{
-//		//alpha doesn't work for this, you need to change the texture's alpha
-//		"ControlName"	"ImagePanel"
-//		"fieldName"		"TransparentViewmodelMask"
-//		"xpos"			"0"
-//		"ypos"			"0"
-//		"zpos"			"-100"
-//		"wide"			"f0"
-//		"tall"			"480"
-//		"visible"		"1"
-//		"enabled"		"1"
-//		"image"			"replay/thumbnails/REFRACTnormal_transparent"
-//		"scaleImage"	"1"
-//	}
+ Doesnt work on dx81
+	"TransparentViewmodelMask"
+	{
+		//alpha doesn't work for this, you need to change the texture's alpha
+		"ControlName"	"ImagePanel"
+		"fieldName"		"TransparentViewmodelMask"
+		"xpos"			"0"
+		"ypos"			"0"
+		"zpos"			"-100"
+		"wide"			"f0"
+		"tall"			"480"
+		"visible"		"1"
+		"enabled"		"1"
+		"image"			"replay/thumbnails/REFRACTnormal_transparent"
+		"scaleImage"	"1"
+	}
+
 	"CustomCrosshair"
 	{
-		//=========================================================================
-		// CROSSHAIR VISIBILITY
-		//=========================================================================
-		// "visible" "1" = Enabled  "visible" "0" = Disabled
-		//=========================================================================
-		
-		"visible"	"1"																																																																			"controlName" "CExLabel" "fieldName" "CustomCrosshair" "wide" "f0" "tall" "f0" "enabled" "1" "zpos" "0" "textAlignment" "center"
-		
-		//=========================================================================
-		// CROSSHAIR TYPE
-		//-------------------------------------------------------------------------
-		// The "labelText" can be changed to display different types of crosshairs
-		// each alphabet letter / symbol represents a different crosshair
-		// Checkout the different options in the TF2Crosshairs.png
-		//=========================================================================
-		
+		"visible"	"1"																																																																			"controlName" "CExLabel" "fieldName" "CustomCrosshair" "wide" "f0" "tall" "f0" "enabled" "1" "zpos" "0" "textAlignment" "center"	
 		"labelText"	"5"
-		
-		//=========================================================================
-		// CROSSHAIR SIZE & PROPERTIES
-		//-------------------------------------------------------------------------
-		// The crosshair size can be any number between 8 and 30
-		// The Outline can be toggled between ON and OFF
-		//=========================================================================
-		
 		"font"		"Size:8 | Outline:OFF"
-		
-		//=========================================================================
-		// CROSSHAIR POSITION
-		//-------------------------------------------------------------------------
-		// "xpos" represents the horizontal crosshair position
-		// "ypos" represents the vertical crosshair position
-		// Adjust the values in order to perfectly center the crosshair
-		//=========================================================================
-		
 		"xpos"		"cs-0.5000"
 		"ypos"		"cs-0.4999"
-		
-		//=========================================================================
-		// CROSSHAIR COLOR
-		//-------------------------------------------------------------------------
-		// The color is a R. (red) G. (green) B. (blu) A. (alpha) code
-		// Adjust each value to get the desired color
-		//=========================================================================
-		
 		"fgcolor"	"0 255 0 255"
 	}
 	

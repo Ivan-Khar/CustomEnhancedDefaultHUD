@@ -12,6 +12,7 @@
 				"antialias"		"1"
 			}
 		}
+		
 		"Size:9 | Outline:OFF"
 		{
 			"1"
@@ -236,7 +237,7 @@
 	
 	"CustomFontFiles"
 	{
-		"15"
+		"115"
 		{
 			"font" "resource/fonts/TF2Crosshairs.ttf"
 			"font" "resource/fonts/tf2crosshairs_linux.ttf" [$LINUX]
