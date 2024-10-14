@@ -1,7 +1,7 @@
 # Custom EnhancedDefaultHUD modification
 ### Made for non-minimal mode
 
-* HUD: https://gamebanana.com/mods/385807
+* HUD: https://gamebanana.com/mods/385807 (RIP)
 * Bottom Match HUD: https://www.teamfortress.tv/50749/swissolos-custom-match-hud
 * Payload HUD: https://github.com/juliastumpf/payload
 * Custom HUD crosshairs: https://github.com/Hypnootize/TF2-HUD-Crosshairs
