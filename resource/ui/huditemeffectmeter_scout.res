@@ -7,11 +7,11 @@
 		"enabled"		"1"
 		"x_offset"		"0"
 		"xpos"			"c"	[$WIN32]
-		"ypos"			"c25"	[$WIN32]
+		"ypos"			"c75"	[$WIN32]
 		"wide"			"100"
 		"tall"			"50"
-		"MeterFG"		"White"
-		"MeterBG"		"Gray"
+		"MeterFG"		"Yellow"
+		"MeterBG"		"Yellow"
 	}
 	
 	"ItemEffectMeterBG"
@@ -31,7 +31,7 @@
 		"teambg_2"		"../hud/misc_ammo_area_horiz2_red"
 		"teambg_2_lodef"	"../hud/misc_ammo_area_red_lodef"
 		"teambg_3"		"../hud/misc_ammo_area_horiz2_blue"
-		"teambg_3_lodef"	"../hud/misc_ammo_area_blue_lodef"				
+		"teambg_3_lodef"	"../hud/misc_ammo_area_blue_lodef"
 	}
 	
 	"ItemEffectMeterLabel"
@@ -79,5 +79,8 @@
 		"textAlignment"			"Left"
 		"dulltext"				"0"
 		"brighttext"			"0"
+		"fgcolor"				"255 0 0 255"
+//		"fgcolor_override"		"255 255 0 255"
+		"bgcolor_override"		"255 255 0 100"
 	}					
 }

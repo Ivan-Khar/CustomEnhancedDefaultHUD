@@ -16,7 +16,8 @@
 		"visible"		"1"
 		"enabled"		"1"
 		"textAlignment"	"Left"
-		"fgcolor_override"		"255 255 0 63"
+		"Bgcolor_override"		"0 0 0 63"
+		"fgcolor_override"		"255 255 0 31"
 		"dulltext"		"0"
 		"brighttext"	"0"
 	}					
